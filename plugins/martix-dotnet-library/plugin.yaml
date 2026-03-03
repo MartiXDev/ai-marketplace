@@ -1,0 +1,14 @@
+name: martix-dotnet-library
+version: 0.1.0
+phase: 1
+description: Unified plugin assets for .NET library create, update, and review workflows in MartiXDev/WebApi.
+required_prefix: martix-
+directories:
+  agents: agents
+  skills: skills
+  prompts: prompts
+  instructions: instructions
+  hooks: hooks
+manifests:
+  commands: commands/command-catalog.yaml
+  workflows: workflows/workflow-catalog.yaml

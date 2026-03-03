@@ -1,0 +1,20 @@
+version: 1
+plugins_root: plugins
+metadata_file: plugin.yaml
+naming:
+  required_prefix: martix-
+  plugin_directory_pattern: "^martix-[a-z0-9-]+$"
+  component_name_pattern: "^martix-[a-z0-9-]+$"
+rules:
+  - Each plugin owns its own agents, skills, prompts, instructions, and hooks.
+  - New skill source files must live under plugins/<plugin>/skills (never under .github).
+  - Directories listed in non_installable_template_sources are shared template sources and are excluded from installable plugin checks.
+required_plugin_directories:
+  - agents
+  - skills
+  - prompts
+  - instructions
+  - hooks
+non_installable_template_sources:
+  - martix-template
+phase_1_plugin: martix-dotnet-library

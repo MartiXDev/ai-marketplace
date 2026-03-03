@@ -1,0 +1,26 @@
+{
+  "name": "martix-ai-marketplace",
+  "owner": {
+    "name": "MartiXDev"
+  },
+  "metadata": {
+    "description": "MartiX custom Copilot CLI plugin marketplace.",
+    "version": "1.0.0",
+    "pluginRoot": "plugins"
+  },
+  "plugins": [
+    {
+      "name": "martix-dotnet-library",
+      "description": "Unified plugin assets for .NET library create, update, and review workflows in MartiXDev/WebApi.",
+      "version": "0.1.0",
+      "source": "plugins/martix-dotnet-library",
+      "category": "development",
+      "tags": [
+        "martix",
+        "dotnet",
+        "library"
+      ],
+      "strict": false
+    }
+  ]
+}
