@@ -1,0 +1,13 @@
+version: 1
+layout_reference: docs/plugin-layout.yaml
+cli_marketplace_manifest: .github/plugin/marketplace.json
+plugins:
+  - name: martix-dotnet-library
+    version: 0.1.0
+    phase: 1
+    plugin_path: plugins/martix-dotnet-library
+    metadata_path: plugins/martix-dotnet-library/plugin.yaml
+    cli_manifest_path: plugins/martix-dotnet-library/plugin.json
+    install:
+      source: local-marketplace
+      marketplace_root: .

@@ -1,0 +1,12 @@
+version: 1
+plugin: martix-dotnet-library
+status: ready
+commands:
+  - id: martix-dotnet-library
+    goal: Create, update, and review .NET library changes with one unified flow.
+    entrypoints:
+      agent: agents/martix-dotnet-library.agent.yaml
+      skill: skills/martix-dotnet-library/SKILL.md
+      prompt: prompts/martix-dotnet-library.prompt.md
+      instruction: instructions/martix-dotnet-library.instructions.md
+      hook: hooks/martix-dotnet-library-validation.hook.yaml

@@ -1,0 +1,13 @@
+{
+  "name": "martix-dotnet-library",
+  "description": "Unified plugin assets for .NET library create, update, and review workflows in MartiXDev/WebApi.",
+  "version": "0.1.0",
+  "keywords": [
+    "martix",
+    "dotnet",
+    "library",
+    "webapi",
+    "unified"
+  ],
+  "skills": "skills/"
+}

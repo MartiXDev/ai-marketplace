@@ -1,0 +1,8 @@
+version: 1
+plugin: martix-dotnet-library
+status: ready
+workflows:
+  - id: dotnet-library
+    description: Unified workflow for creating, updating, and reviewing .NET library changes.
+    command_sequence:
+      - martix-dotnet-library

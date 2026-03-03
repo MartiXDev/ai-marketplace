@@ -1,0 +1,19 @@
+version: 1
+id: martix-dotnet-library-validation
+name: martix-dotnet-library-validation
+description: Shared validation gate for MartiX .NET library author, update, and review operations.
+template_source: plugins/martix-template/dotnet-library/hooks/dotnet-library-validation.hook.template.yaml
+applies_to:
+  - martix-dotnet-library
+run_from: MartiXDev/WebApi repository root
+stages:
+  - name: restore
+    command: dotnet restore --nologo
+  - name: build
+    command: dotnet build --nologo
+  - name: tests
+    command: dotnet test --nologo --no-build
+  - name: pack
+    command: dotnet pack -c Release --no-build
+    when: packaging-in-scope
+failure_policy: stop-on-error

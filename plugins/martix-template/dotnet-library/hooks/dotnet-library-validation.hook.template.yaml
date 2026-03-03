@@ -1,0 +1,21 @@
+version: 1
+id: <plugin-id-prefix>-validation
+name: <plugin-id-prefix>-validation
+description: Shared validation gate for .NET library author, update, and review operations.
+applies_to:
+  - <plugin-id-prefix>-author
+  - <plugin-id-prefix>-update
+  - <plugin-id-prefix>-review
+run_from: <target-repository> repository root
+stages:
+  - name: restore
+    command: dotnet restore --nologo
+  - name: build
+    command: dotnet build --nologo
+  - name: tests
+    command: dotnet test --nologo --no-build
+  - name: pack
+    command: dotnet pack -c Release --no-build
+    when: packaging-in-scope
+failure_policy: stop-on-error
+
