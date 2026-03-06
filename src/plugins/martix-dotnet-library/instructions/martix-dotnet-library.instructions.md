@@ -1,5 +1,5 @@
 ---
-description: Shared operating instructions for MartiX .NET library author, update, and review commands.
+description: 'Shared operating instructions for MartiX .NET library author, update, and review commands.'
 applyTo: plugins/martix-dotnet-library/**
 template_source: plugins/martix-template/dotnet-library/instructions/dotnet-library.instructions.template.md
 ---
@@ -8,7 +8,7 @@ template_source: plugins/martix-template/dotnet-library/instructions/dotnet-libr
 
 Use these rules for the unified `martix-dotnet-library` command assets.
 
-## Core Expectations
+## General Instructions
 
 - Target repository context is `MartiXDev/WebApi`.
 - Prefer minimal, surgical changes that preserve existing behavior.
@@ -16,7 +16,7 @@ Use these rules for the unified `martix-dotnet-library` command assets.
 - Add or update tests whenever behavior or contracts change.
 - Report risks, compatibility impact, and validation outcomes clearly.
 
-## .NET Library Guidance Gates
+## Best Practices
 
 - **Cross-platform targeting**
   - Default to modern target frameworks (`net8.0` or later) for new work.
@@ -37,6 +37,45 @@ Use these rules for the unified `martix-dotnet-library` command assets.
   - Apply strong naming only when target compatibility requires it.
   - Do not change the strong-name key identity after publishing.
 
+## Code Standards
+
+### API and contract discipline
+
+- Prefer additive API evolution over contract replacement.
+- Preserve namespace consistency and public member naming.
+- Add Obsolete guidance before removing or reshaping public APIs.
+
+### Good Example - Additive compatibility-safe API
+
+```csharp
+[Obsolete("Use CreateAsync(CreateRequest request, CancellationToken ct).")]
+public Task<Result> CreateAsync(string name)
+{
+    return CreateAsync(new CreateRequest(name), CancellationToken.None);
+}
+```
+
+### Bad Example - Silent breaking change
+
+```csharp
+public Task<Result> CreateAsync(Guid id, string name)
+{
+    // Existing signature replaced without migration path.
+}
+```
+
+## Common Patterns
+
+### Dependency review pattern
+
+- Record why each new package is required.
+- Prefer minimum supported versions over exact pins.
+
+### Versioning decision pattern
+
+- Classify compatibility impact first.
+- Recommend SemVer increment that matches impact.
+
 ## Validation Baseline
 
 Run the shared hook commands from repository root unless overridden:
@@ -49,7 +88,13 @@ Run the shared hook commands from repository root unless overridden:
 If the repo uses scoped solutions or test projects, run equivalent
 targeted commands and record exactly what was validated.
 
-## Template source
+## Maintenance
+
+- Update this file and template source when .NET guidance or plugin workflow
+  changes.
+- Keep examples aligned with current repository conventions.
+
+## Template Source
 
 - [Instruction template source](../../martix-template/dotnet-library/instructions/dotnet-library.instructions.template.md)
 

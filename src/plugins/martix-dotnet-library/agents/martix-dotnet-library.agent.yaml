@@ -12,8 +12,9 @@ entrypoints:
   hook: hooks/martix-dotnet-library-validation.hook.yaml
 workflow:
   - Classify requested operation as author, update, or review.
-  - Confirm scope, targeting strategy, dependency impact, and SemVer intent.
+  - Confirm scope, target consumers, compatibility constraints, and SemVer intent.
   - Apply minimal, compatibility-safe changes or produce prioritized review findings.
+  - Classify source/binary/behavioral compatibility impact and mitigation plan.
   - Update tests and migration notes where contracts or behavior are affected.
-  - Execute validation hook commands and summarize outcomes with release risk.
+  - Execute validation hook commands and summarize release readiness and residual risk.
 

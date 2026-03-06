@@ -44,6 +44,7 @@ guidance changes.
 | `./hooks/martix-dotnet-library-validation.hook.yaml` | Shared validation gate |
 | `./agents/*.agent.yaml` | Agent-mode execution behavior |
 | `./skills/**/SKILL.md` | Skill context, prerequisites, and workflow |
+| `./skills/**/references/*.md` | Extended checklists and detailed skill guidance |
 | `./prompts/*.prompt.md` | Prompt contract and output shape |
 | `../martix-template/dotnet-library/**` | Shared source templates used for reusable boilerplate |
 
@@ -52,7 +53,7 @@ guidance changes.
 | Asset | Main requirements | Dependencies |
 | --- | --- | --- |
 | Unified agent | Target repo context (`MartiXDev/WebApi`) and operation classification (author/update/review) | Matching skill, prompt, shared instruction, shared hook |
-| Unified skill | Clear unified use cases and output checklist for create/update/review | Matching prompt + shared instruction + shared hook |
+| Unified skill | Clear unified use cases and output checklist for create/update/review | Matching prompt + shared instruction + shared hook + skill references |
 | Unified prompt | Required inputs and expected deliverable sections for all operation modes | Matching skill + shared instruction |
 | Shared instruction | Core behavior rules and validation expectations | Shared hook commands |
 | Shared hook | .NET SDK and runnable target repo (`MartiXDev/WebApi`) | `dotnet restore`, `dotnet build`, `dotnet test`, optional `dotnet pack` |

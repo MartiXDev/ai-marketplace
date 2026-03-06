@@ -19,7 +19,8 @@ workflows for .NET libraries in MartiXDev/WebApi.
 1. Confirm operation mode and expected outcome.
 2. Analyze baseline behavior/contracts and dependency surface.
 3. Implement minimal changes or provide prioritized review findings.
-4. Run validation commands from the shared hook and include outcomes.
+4. Classify compatibility impact (source, binary, behavioral).
+5. Run validation commands from the shared hook and include outcomes.
 
 ## .NET Library Guidance Checks
 
@@ -31,9 +32,22 @@ workflows for .NET libraries in MartiXDev/WebApi.
 
 ## Deliverable
 
-- Operation summary and key changes/findings.
-- Compatibility impact and migration guidance (if needed).
-- Validation evidence and release readiness recommendation.
+Return output with these sections:
+
+1. **Operation summary**
+2. **Change or finding details**
+3. **Compatibility impact**
+4. **Versioning recommendation**
+5. **Validation evidence**
+6. **Release readiness recommendation**
+
+For compatibility impact, include a table:
+
+| Area | Impact | Risk | Mitigation |
+| --- | --- | --- | --- |
+| Source compatibility | None/Low/Medium/High | ... | ... |
+| Binary compatibility | None/Low/Medium/High | ... | ... |
+| Behavioral compatibility | None/Low/Medium/High | ... | ... |
 
 ## References
 
