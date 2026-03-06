@@ -1,0 +1,20 @@
+version: 1
+id: martix-dotnet-library
+name: martix-dotnet-library
+description: Unified .NET library assistant for create, update, and review workflows in MartiXDev/WebApi.
+mode: unified
+target_repository: MartiXDev/WebApi
+template_source: plugins/martix-template/dotnet-library/agents/dotnet-library-mode.agent.template.yaml
+entrypoints:
+  skill: skills/martix-dotnet-library/SKILL.md
+  prompt: prompts/martix-dotnet-library.prompt.md
+  instruction: instructions/martix-dotnet-library.instructions.md
+  hook: hooks/martix-dotnet-library-validation.hook.yaml
+workflow:
+  - Classify requested operation as author, update, or review.
+  - Confirm scope, target consumers, compatibility constraints, and SemVer intent.
+  - Apply minimal, compatibility-safe changes or produce prioritized review findings.
+  - Classify source/binary/behavioral compatibility impact and mitigation plan.
+  - Update tests and migration notes where contracts or behavior are affected.
+  - Execute validation hook commands and summarize release readiness and residual risk.
+

@@ -1,0 +1,61 @@
+{
+  "skill_name": "martix-csharp",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Refactor this C# class library service to modern C# 14+ style while preserving behavior. Focus only on language-level improvements (extension blocks for new extensions, field keyword in validated properties, null-conditional assignment where equivalent). Do not introduce ASP.NET architecture guidance.",
+      "expected_output": "A behavior-safe modernization proposal with concrete C# 14+ upgrades and explicit scope control.",
+      "files": [],
+      "assertions": [
+        "Response confirms language-focused scope and excludes framework architecture drift.",
+        "Response proposes at least two concrete C# 14+ modernization patterns.",
+        "Response includes behavior-preservation caveat and compatibility assumptions."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this async repository method that intermittently hangs: it uses .Result internally and does not accept CancellationToken. Provide corrected code and explain why the original is risky.",
+      "expected_output": "A corrected async implementation with cancellation propagation, no sync-over-async, and precise error handling notes.",
+      "files": [],
+      "assertions": [
+        "Response removes sync-over-async patterns (.Result/.Wait/GetAwaiter().GetResult).",
+        "Response includes CancellationToken in method signature and downstream calls.",
+        "Response explains deadlock and starvation risk plus cancellation behavior."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a small public API in C# for parsing product identifiers (e.g., PRD-2026-001). I need immutable models, precise exceptions for invalid input, XML docs, and a test plan aligned to the project existing test framework.",
+      "expected_output": "A concise API design with immutable types, guarded contracts, XML documentation guidance, and framework-aligned tests.",
+      "files": [],
+      "assertions": [
+        "Response proposes immutable DTO/domain shape (record or equivalent).",
+        "Response includes precise exception strategy instead of broad Exception.",
+        "Response includes XML doc examples or explicit guidance for public members.",
+        "Response maps test plan to existing framework rather than forcing a new one."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Perform a language-focused code review of this C# diff. Prioritize nullability correctness, API visibility, naming consistency, and public contract documentation. Return findings ordered by severity.",
+      "expected_output": "A prioritized review with actionable findings focused on language/API quality and contract clarity.",
+      "files": [],
+      "assertions": [
+        "Response returns findings ordered by severity or impact.",
+        "Response covers nullability and visibility concerns when present.",
+        "Response avoids irrelevant architecture/framework recommendations."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Given a C# utility class with multiple static helper methods, suggest improvements for maintainability and testability without adding unnecessary abstraction. Include test case recommendations and validation commands.",
+      "expected_output": "A minimal-change improvement plan with practical test cases and repository-appropriate validation commands.",
+      "files": [],
+      "assertions": [
+        "Response avoids introducing interfaces or abstractions without clear need.",
+        "Response includes concrete behavior-oriented test recommendations.",
+        "Response includes restore/build/test command guidance or scoped equivalents."
+      ]
+    }
+  ]
+}

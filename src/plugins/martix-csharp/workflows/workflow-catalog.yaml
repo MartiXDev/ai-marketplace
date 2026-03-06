@@ -1,0 +1,8 @@
+version: 1
+plugin: martix-csharp
+status: ready
+workflows:
+  - id: csharp-language
+    description: Unified workflow for C# 14+ language modernization, correctness, and review.
+    command_sequence:
+      - martix-csharp

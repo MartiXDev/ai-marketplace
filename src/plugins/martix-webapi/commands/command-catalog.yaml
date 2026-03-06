@@ -1,0 +1,12 @@
+version: 1
+plugin: martix-webapi
+status: ready
+commands:
+  - id: martix-webapi
+    goal: Plan and implement new net10 web apps with MartiX.WebApi conventions.
+    entrypoints:
+      agent: agents/martix-webapi.agent.yaml
+      skill: skills/martix-webapi/SKILL.md
+      prompt: prompts/martix-webapi.prompt.md
+      instruction: instructions/martix-webapi.instructions.md
+      hook: hooks/martix-webapi-validation.hook.yaml

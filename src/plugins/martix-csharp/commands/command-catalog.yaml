@@ -1,0 +1,12 @@
+version: 1
+plugin: martix-csharp
+status: ready
+commands:
+  - id: martix-csharp
+    goal: Author, refactor, and review C# 14+ code with language-focused guidance.
+    entrypoints:
+      agent: agents/martix-csharp.agent.yaml
+      skill: skills/martix-csharp/SKILL.md
+      prompt: prompts/martix-csharp.prompt.md
+      instruction: instructions/martix-csharp.instructions.md
+      hook: hooks/martix-csharp-validation.hook.yaml

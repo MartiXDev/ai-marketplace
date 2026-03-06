@@ -1,0 +1,18 @@
+version: 1
+id: <plugin-id-prefix>-<mode>
+name: <plugin-id-prefix>-<mode>
+description: <Mode-specific description for .NET library operations.>
+mode: <mode>
+target_repository: <target-repository>
+entrypoints:
+  skill: skills/<plugin-id-prefix>-<mode>/SKILL.md
+  prompt: prompts/<plugin-id-prefix>-<mode>.prompt.md
+  instruction: instructions/<plugin-id-prefix>.instructions.md
+  hook: hooks/<plugin-id-prefix>-validation.hook.yaml
+workflow:
+  - Confirm scope, target consumers, compatibility expectations, and acceptance criteria.
+  - Apply minimal changes to code and contracts, preserving behavior by default.
+  - Classify source/binary/behavioral compatibility impact and mitigation strategy.
+  - Add or update tests for expected and high-risk scenarios.
+  - Execute validation hook commands and summarize release readiness and residual risk.
+

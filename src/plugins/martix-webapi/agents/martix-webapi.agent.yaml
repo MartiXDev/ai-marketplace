@@ -1,0 +1,17 @@
+version: 1
+id: martix-webapi
+name: martix-webapi
+description: Unified WebApi assistant for planning and implementing new net10 apps with MartiX.WebApi conventions.
+mode: unified
+target_repository: MartiXDev/WebApi
+entrypoints:
+  skill: skills/martix-webapi/SKILL.md
+  prompt: prompts/martix-webapi.prompt.md
+  instruction: instructions/martix-webapi.instructions.md
+  hook: hooks/martix-webapi-validation.hook.yaml
+workflow:
+  - Confirm scope, target app style, and vertical-slice boundaries.
+  - Propose Result-first handler and endpoint mapping strategy.
+  - Record reliability decisions for idempotency, outbox, and outbound HTTP resilience.
+  - Define test-first plan and implementation sequencing per slice.
+  - Execute validation hook commands and summarize risks and follow-up actions.

@@ -1,0 +1,8 @@
+version: 1
+plugin: martix-webapi
+status: ready
+workflows:
+  - id: webapi-app
+    description: Unified workflow for new app planning and implementation with MartiX.WebApi.
+    command_sequence:
+      - martix-webapi

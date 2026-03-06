@@ -1,0 +1,13 @@
+{
+  "name": "martix-webapi",
+  "description": "Unified plugin assets for planning and implementing new net10 web apps with MartiX.WebApi guidance.",
+  "version": "0.1.0",
+  "keywords": [
+    "martix",
+    "webapi",
+    "dotnet",
+    "net10",
+    "vertical-slice"
+  ],
+  "skills": "skills/"
+}

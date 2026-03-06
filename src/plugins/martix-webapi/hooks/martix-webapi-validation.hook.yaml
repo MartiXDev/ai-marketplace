@@ -1,0 +1,15 @@
+version: 1
+id: martix-webapi-validation
+name: martix-webapi-validation
+description: Shared validation gate for martix-webapi planning and implementation outcomes.
+applies_to:
+  - martix-webapi
+run_from: target repository root
+stages:
+  - name: restore
+    command: dotnet restore --nologo
+  - name: build
+    command: dotnet build --nologo
+  - name: tests
+    command: dotnet test --nologo --no-build
+failure_policy: stop-on-error

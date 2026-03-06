@@ -1,0 +1,13 @@
+{
+  "name": "martix-csharp",
+  "description": "Unified plugin assets for C# 14+ language-focused authoring, refactoring, and review workflows.",
+  "version": "0.1.0",
+  "keywords": [
+    "martix",
+    "csharp",
+    "dotnet",
+    "language",
+    "code-quality"
+  ],
+  "skills": "skills/"
+}
