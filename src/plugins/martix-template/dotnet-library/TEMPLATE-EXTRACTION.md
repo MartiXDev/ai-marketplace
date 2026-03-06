@@ -15,6 +15,7 @@ This map records reusable patterns extracted from
 | --- | --- | --- |
 | `agents/martix-dotnet-library.agent.yaml` | Shared agent schema + entrypoint pattern + workflow shape | `agents/dotnet-library-mode.agent.template.yaml` |
 | `skills/martix-dotnet-library/SKILL.md` | Shared skill frontmatter/workflow/checklist structure | `skills/dotnet-library-mode.SKILL.template.md` |
+| `skills/martix-dotnet-library/references/release-checklists.md` | Reusable mode checklists and release-readiness structure | `skills/references/dotnet-library-checklists.template.md` |
 | `prompts/martix-dotnet-library.prompt.md` | Shared prompt sections (Role, Required Inputs, Steps, Deliverable, References) | `prompts/dotnet-library-mode.prompt.template.md` |
 | `instructions/martix-dotnet-library.instructions.md` | Shared .NET library operating rules and quality gates | `instructions/dotnet-library.instructions.template.md` |
 | `hooks/martix-dotnet-library-validation.hook.yaml` | Shared validation gate shape | `hooks/dotnet-library-validation.hook.template.yaml` |

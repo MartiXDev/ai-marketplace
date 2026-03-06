@@ -18,8 +18,9 @@ with compatibility-safe outcomes.
 
 1. Confirm existing behavior, contracts, and dependency surface.
 2. Implement the smallest correct change aligned to conventions.
-3. Add/update tests and migration notes where needed.
-4. Run shared validation commands and report outcomes.
+3. Classify source/binary/behavioral compatibility impact and mitigation.
+4. Add/update tests and migration notes where needed.
+5. Run shared validation commands and report outcomes.
 
 ## .NET library guidance checks
 
@@ -30,9 +31,22 @@ with compatibility-safe outcomes.
 
 ## Deliverable
 
-- Change summary with compatibility impact.
-- Validation evidence and unresolved risks.
-- Recommended next actions for release readiness.
+Return output with these sections:
+
+1. **Operation summary**
+2. **Change or finding details**
+3. **Compatibility impact**
+4. **Versioning recommendation**
+5. **Validation evidence**
+6. **Release readiness recommendation**
+
+For compatibility impact, include a table:
+
+| Area | Impact | Risk | Mitigation |
+| --- | --- | --- | --- |
+| Source compatibility | None/Low/Medium/High | ... | ... |
+| Binary compatibility | None/Low/Medium/High | ... | ... |
+| Behavioral compatibility | None/Low/Medium/High | ... | ... |
 
 ## References
 

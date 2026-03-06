@@ -10,8 +10,9 @@ entrypoints:
   instruction: instructions/<plugin-id-prefix>.instructions.md
   hook: hooks/<plugin-id-prefix>-validation.hook.yaml
 workflow:
-  - Confirm scope, compatibility expectations, and acceptance criteria.
+  - Confirm scope, target consumers, compatibility expectations, and acceptance criteria.
   - Apply minimal changes to code and contracts, preserving behavior by default.
+  - Classify source/binary/behavioral compatibility impact and mitigation strategy.
   - Add or update tests for expected and high-risk scenarios.
-  - Execute validation hook commands and summarize outcomes.
+  - Execute validation hook commands and summarize release readiness and residual risk.
 

@@ -30,6 +30,7 @@ purpose: Track resources and requirements used to build and maintain plugin asse
 | `./hooks/*.hook.yaml` | Validation gates |
 | `./agents/*.agent.yaml` | Agent execution behavior |
 | `./skills/**/SKILL.md` | Skill context and workflow |
+| `./skills/**/references/*.md` | Extended checklists and detailed skill guidance |
 | `./prompts/*.prompt.md` | Prompt contract and deliverable shape |
 
 ## Update workflow when resources change
