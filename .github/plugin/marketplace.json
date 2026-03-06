@@ -6,19 +6,49 @@
   "metadata": {
     "description": "MartiX custom Copilot CLI plugin marketplace.",
     "version": "1.0.0",
-    "pluginRoot": "plugins"
+    "pluginRoot": "src/plugins"
   },
   "plugins": [
     {
       "name": "martix-dotnet-library",
       "description": "Unified plugin assets for .NET library create, update, and review workflows in MartiXDev/WebApi.",
       "version": "0.1.0",
-      "source": "plugins/martix-dotnet-library",
+      "source": "src/plugins/martix-dotnet-library",
       "category": "development",
       "tags": [
         "martix",
         "dotnet",
         "library"
+      ],
+      "strict": false
+    },
+    {
+      "name": "martix-webapi",
+      "description": "Unified plugin assets for planning and implementing new net10 web apps with MartiX.WebApi guidance.",
+      "version": "0.1.0",
+      "source": "src/plugins/martix-webapi",
+      "category": "development",
+      "tags": [
+        "martix",
+        "webapi",
+        "dotnet",
+        "net10",
+        "vertical-slice"
+      ],
+      "strict": false
+    },
+    {
+      "name": "martix-csharp",
+      "description": "Unified plugin assets for C# 14+ language-focused authoring, refactoring, and review workflows.",
+      "version": "0.1.0",
+      "source": "src/plugins/martix-csharp",
+      "category": "development",
+      "tags": [
+        "martix",
+        "csharp",
+        "dotnet",
+        "language",
+        "code-quality"
       ],
       "strict": false
     }

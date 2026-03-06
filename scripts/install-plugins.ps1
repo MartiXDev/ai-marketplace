@@ -6,6 +6,8 @@ Batch installs Copilot plugins from this marketplace.
 Installs all plugins from marketplace metadata or only selected plugins.
 Plugin names are loaded from .github\plugin\marketplace.json (preferred)
 or marketplace\catalog.yaml.
+Plugin source directories may be rooted under src\plugins as configured
+in marketplace metadata.
 
 .PARAMETER Plugins
 One or more plugin names to install. Supports comma-separated input.

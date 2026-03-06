@@ -1,0 +1,14 @@
+name: martix-webapi
+version: 0.1.0
+phase: 2
+description: Unified plugin assets for planning and implementing new net10 web apps with MartiX.WebApi guidance.
+required_prefix: martix-
+directories:
+  agents: agents
+  skills: skills
+  prompts: prompts
+  instructions: instructions
+  hooks: hooks
+manifests:
+  commands: commands/command-catalog.yaml
+  workflows: workflows/workflow-catalog.yaml
