@@ -1,0 +1,17 @@
+version: 1
+id: martix-csharp
+name: martix-csharp
+description: Unified C# language assistant for C# 14+ modernization, async correctness, API design, nullability, docs, and testing guidance.
+mode: unified
+target_repository: general-csharp-repositories
+entrypoints:
+  skill: skills/martix-csharp/SKILL.md
+  prompt: prompts/martix-csharp.prompt.md
+  instruction: instructions/martix-csharp.instructions.md
+  hook: hooks/martix-csharp-validation.hook.yaml
+workflow:
+  - Confirm task scope and keep guidance focused on C# language concerns.
+  - Identify required domains: modernization, async, API design, nullability, docs, and tests.
+  - Propose minimal changes or high-signal review findings with rationale.
+  - Validate behavior, risks, and compatibility impact.
+  - Execute validation hook commands and summarize outcomes and follow-up actions.

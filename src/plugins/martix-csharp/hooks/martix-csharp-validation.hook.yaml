@@ -1,0 +1,15 @@
+version: 1
+id: martix-csharp-validation
+name: martix-csharp-validation
+description: Shared validation gate for martix-csharp language-focused author, refactor, fix, and review operations.
+applies_to:
+  - martix-csharp
+run_from: target repository root
+stages:
+  - name: restore
+    command: dotnet restore --nologo
+  - name: build
+    command: dotnet build --nologo
+  - name: tests
+    command: dotnet test --nologo --no-build
+failure_policy: stop-on-error

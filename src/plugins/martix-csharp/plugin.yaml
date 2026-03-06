@@ -1,0 +1,14 @@
+name: martix-csharp
+version: 0.1.0
+phase: 3
+description: Unified plugin assets for C# 14+ language-focused authoring, refactoring, and review workflows.
+required_prefix: martix-
+directories:
+  agents: agents
+  skills: skills
+  prompts: prompts
+  instructions: instructions
+  hooks: hooks
+manifests:
+  commands: commands/command-catalog.yaml
+  workflows: workflows/workflow-catalog.yaml
