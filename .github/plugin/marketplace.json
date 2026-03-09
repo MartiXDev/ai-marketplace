@@ -38,17 +38,54 @@
       "strict": false
     },
     {
-      "name": "martix-csharp",
-      "description": "Unified plugin assets for C# 14+ language-focused authoring, refactoring, and review workflows.",
+      "name": "martix-dotnet-csharp",
+      "description": "Standalone .NET 10+ and C# 14+ skill package for authoring, modernization, and review workflows, registered directly from src/skills as the single source of truth.",
       "version": "0.1.0",
-      "source": "src/plugins/martix-csharp",
+      "source": "src/skills/martix-dotnet-csharp",
       "category": "development",
       "tags": [
         "martix",
-        "csharp",
         "dotnet",
-        "language",
-        "code-quality"
+        "csharp",
+        "net10",
+        "csharp14",
+        "sdk",
+        "standalone-skill"
+      ],
+      "strict": false
+    },
+    {
+      "name": "martix-fastendpoints",
+      "description": "Standalone FastEndpoints skill package for startup, endpoint contracts, processors, transport choices, security, testing, versioning, and Native AOT workflows, registered directly from src/skills.",
+      "version": "0.1.0",
+      "source": "src/skills/martix-fastendpoints",
+      "category": "development",
+      "tags": [
+        "martix",
+        "fastendpoints",
+        "dotnet",
+        "aspnetcore",
+        "openapi",
+        "aot",
+        "standalone-skill"
+      ],
+      "strict": false
+    },
+    {
+      "name": "martix-fluentvalidation",
+      "description": "Standalone FluentValidation skill package for validator authoring, built-in validator selection, RuleSets and cascade behavior, ASP.NET Core integration, async validation, extensibility, localization, testing, and upgrade planning, registered directly from src/skills.",
+      "version": "0.1.0",
+      "source": "src/skills/martix-fluentvalidation",
+      "category": "development",
+      "tags": [
+        "martix",
+        "fluentvalidation",
+        "dotnet",
+        "aspnetcore",
+        "validators",
+        "rulesets",
+        "async-validation",
+        "standalone-skill"
       ],
       "strict": false
     }
