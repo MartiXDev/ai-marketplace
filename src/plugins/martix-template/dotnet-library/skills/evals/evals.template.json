@@ -1,0 +1,22 @@
+{
+  "skill": "<plugin-id-prefix>-<mode>",
+  "evals": [
+    {
+      "id": "scope-discipline",
+      "prompt": "<Describe a .NET library task that must preserve compatibility and stay within scope.>",
+      "expected_sections": [
+        "Operation summary",
+        "Change or finding details",
+        "Compatibility impact",
+        "Versioning recommendation",
+        "Validation evidence",
+        "Release readiness recommendation"
+      ],
+      "assertions": [
+        "<Calls out scope and compatibility constraints explicitly>",
+        "<Provides at least one validation command or evidence note>",
+        "<Avoids architecture drift outside the requested .NET library scope>"
+      ]
+    }
+  ]
+}

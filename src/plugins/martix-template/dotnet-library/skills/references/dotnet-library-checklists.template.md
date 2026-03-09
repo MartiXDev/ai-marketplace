@@ -1,7 +1,8 @@
 ## .NET Library Checklists Template
 
 Use this file as a starting point for mode-specific planning and review
-checklists.
+checklists. It is the detailed operational companion to the quick reference in
+`SKILL.md` and any focused rule files under `rules/`.
 
 ## Author mode
 

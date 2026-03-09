@@ -21,26 +21,74 @@ use most often for day-to-day development.
 
 ## The best .NET and C# skill packs
 
-- [.NET Skills for Claude Code by Aaron Stannard](https://skills.sh/aaronontheweb/dotnet-skills)
+- [.NET Skills for Claude Code by Aaron Stannard](https://skills.sh/aaronontheweb/dotnet-skills) — modern-csharp-coding-standards, efcore-patterns, csharp-concurrency-patterns, dotnet-project-structure, database-performance, playwright-blazor-testing, type-design-performance, dependency-injection-patterns, api-design, dotnet-local-tools, serialization, package-management, testcontainers-integration-tests, microsoft-extensions-configuration, mjml-email-templates, crap-analysis, dotnet-slopwatch, akka-net-best-practices, akka-net-testing-patterns, snapshot-testing, aspire-integration-testing, aspire-service-defaults, akka-net-management, akka-hosting-actor-patterns, akka-net-aspire-configuration, skills-index-snippets, marketplace-publishing, ilspy-decompile, playwright-ci-caching, mailpit-integration, verify-email-snapshots, aspire-configuration, dotnet-devcert-trust, transactional-emails
   - [Source repository for Aaron Stannard .NET Skills](https://github.com/aaronontheweb/dotnet-skills)
+
+  ```bash
+  npx skills add https://github.com/aaronontheweb/dotnet-skills --skill modern-csharp-coding-standards
+  npx skills add https://github.com/aaronontheweb/dotnet-skills --skill efcore-patterns
+  npx skills add https://github.com/aaronontheweb/dotnet-skills --skill csharp-concurrency-patterns
+  npx skills add https://github.com/aaronontheweb/dotnet-skills --skill dotnet-project-structure
+  npx skills add https://github.com/aaronontheweb/dotnet-skills --skill database-performance
+
+  ```
+
 - [dotnet-10-csharp-14 skill pack](https://skills.sh/mhagrelius/dotfiles/dotnet-10-csharp-14)
+
+  ```bash
+  npx skills add https://github.com/mhagrelius/dotfiles --skill dotnet-10-csharp-14
+  ```
+
 - [Awesome Copilot C# .NET Development plugin (reference only, not preferred)](https://github.com/github/awesome-copilot/tree/main/plugins/csharp-dotnet-development)
+
+  ```bash
+  npx skills add https://github.com/github/awesome-copilot --skill csharp-docs
+  npx skills add https://github.com/github/awesome-copilot --skill csharp-tunit
+  ```
 
 ## The best UI and frontend skills
 
 - [Fluent UI Blazor skill](https://skills.sh/github/awesome-copilot/fluentui-blazor)
+
+  `npx skills add https://github.com/github/awesome-copilot --skill fluentui-blazor`
 - [Approved Skills collection including Fluent 2 design system references](https://github.com/fefogarcia/approved-skills)
-- [Vercel Labs Agent Skills (frontend and React focused)](https://github.com/vercel-labs/agent-skills)
-- [Vercel Labs Next Skills (Next.js focused)](https://github.com/vercel-labs/next-skills)
+- ❤️⭐ [Vercel Labs Agent Skills (frontend and React focused)](https://github.com/vercel-labs/agent-skills) — Vercel's official collection of agent skills
+
+  ```bash
+  npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
+  npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines
+  npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns
+  npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-native-skills
+  # OPTIONAL:
+  npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-deploy
+  npx skills add https://github.com/vercel-labs/agent-skills --skill deploy-to-vercel
+  ```
+
+- ❤️⭐ [Vercel Labs Next Skills (Next.js focused)](https://github.com/vercel-labs/next-skills) —
+
+  ```bash
+  npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices
+  npx skills add https://github.com/vercel-labs/next-skills --skill next-cache-components
+  npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practice
+  OPTIONAL
+  npx skills add https://github.com/vercel-labs/next-skills --skill next-upgrade
+  ```
+
+- ❤️⭐ [Vercel Labs Agent Browser](https://github.com/vercel-labs/agent-browser) —
+
+  `npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser`
+- ❤️⭐ [Vercel Labs Find Skills](https://github.com/vercel-labs/skills) — The CLI for the open agent skills ecosystem => `npx skills`
+
+  `npx skills add https://github.com/vercel-labs/skills --skill find-skills`
 
 ## Other favorite types of skills
 
 ### From Anthropic
 
-- ⭐ [frontend-design](https://skills.sh/anthropics/skills/frontend-design) — This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+- ❤️⭐ [frontend-design](https://skills.sh/anthropics/skills/frontend-design) — This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
 
   `npx skills add https://github.com/anthropics/skills --skill frontend-design`
-- ⭐ [skill-creator](https://skills.sh/anthropics/skills/skill-creator) — This skill helps design and scaffold new reusable skills with strong metadata, trigger phrases, and workflow structure.
+- ❤️⭐ [skill-creator](https://skills.sh/anthropics/skills/skill-creator) — This skill helps design and scaffold new reusable skills with strong metadata, trigger phrases, and workflow structure.
 
   `npx skills add https://github.com/anthropics/skills --skill skill-creator`
 - ⭐ [pdf](https://skills.sh/anthropics/skills/pdf) — This skill creates and edits PDF outputs for documentation workflows, including structured content and export-ready formatting.

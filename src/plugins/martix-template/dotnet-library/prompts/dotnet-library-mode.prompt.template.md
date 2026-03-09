@@ -14,13 +14,22 @@ with compatibility-safe outcomes.
 - Target project/package location.
 - Compatibility requirements and release constraints.
 
+## Skill package resources
+
+- Quick reference: `../skills/<plugin-id-prefix>-<mode>/SKILL.md`
+- Expanded guide: `../skills/<plugin-id-prefix>-<mode>/AGENTS.md`
+- Rule files: `../skills/<plugin-id-prefix>-<mode>/rules/`
+- Detailed runbooks: `../skills/<plugin-id-prefix>-<mode>/references/`
+- Category metadata: `../skills/<plugin-id-prefix>-<mode>/metadata.json`
+
 ## Steps
 
-1. Confirm existing behavior, contracts, and dependency surface.
-2. Implement the smallest correct change aligned to conventions.
-3. Classify source/binary/behavioral compatibility impact and mitigation.
-4. Add/update tests and migration notes where needed.
-5. Run shared validation commands and report outcomes.
+1. Consult the layered skill package based on task depth and risk.
+2. Confirm existing behavior, contracts, and dependency surface.
+3. Implement the smallest correct change aligned to conventions.
+4. Classify source/binary/behavioral compatibility impact and mitigation.
+5. Add or update tests and migration notes where needed.
+6. Run shared validation commands and report outcomes.
 
 ## .NET library guidance checks
 
@@ -51,5 +60,7 @@ For compatibility impact, include a table:
 ## References
 
 - Mode skill: `../skills/<plugin-id-prefix>-<mode>/SKILL.md`
+- Expanded guide: `../skills/<plugin-id-prefix>-<mode>/AGENTS.md`
+- Category map: `../skills/<plugin-id-prefix>-<mode>/rules/_sections.md`
 - Shared instruction: `../instructions/<plugin-id-prefix>.instructions.md`
-
+- Validation hook: `../hooks/<plugin-id-prefix>-validation.hook.yaml`
