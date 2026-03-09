@@ -10,6 +10,8 @@ entrypoints:
   instruction: instructions/<plugin-id-prefix>.instructions.md
   hook: hooks/<plugin-id-prefix>-validation.hook.yaml
 workflow:
+  - Consult the layered skill package (`SKILL.md`, `AGENTS.md`, `rules/`, and
+    `references/`) according to task depth and risk.
   - Confirm scope, target consumers, compatibility expectations, and acceptance criteria.
   - Apply minimal changes to code and contracts, preserving behavior by default.
   - Classify source/binary/behavioral compatibility impact and mitigation strategy.

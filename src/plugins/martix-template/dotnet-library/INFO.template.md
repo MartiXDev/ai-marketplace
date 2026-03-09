@@ -31,6 +31,13 @@ resource_registry: ./RESOURCES.md
 | Shared instruction | `<instruction ID>` | `./instructions/` |
 | Shared validation hook | `<hook ID>` | `./hooks/` |
 
+## Skill package support files
+
+- Skill folders may also contain `AGENTS.md`, `README.md`, `metadata.json`,
+  `rules/`, `references/`, and `evals/` when the plugin adopts the layered
+  Vercel-inspired skill package model.
+- Keep the quick reference (`SKILL.md`) and expanded guidance assets aligned.
+
 ## Requirements to use and maintain this plugin
 
 - Copilot CLI with plugin marketplace support.

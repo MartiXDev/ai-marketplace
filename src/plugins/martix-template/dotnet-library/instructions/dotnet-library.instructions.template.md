@@ -86,4 +86,6 @@ Run from target repository root unless intentionally scoped:
 
 - Update this template when .NET guidance or plugin workflows change.
 - Keep examples aligned with repository conventions.
+- When a plugin uses layered skill-package assets, keep `SKILL.md`, `AGENTS.md`,
+  `metadata.json`, `rules/`, and `references/` synchronized.
 

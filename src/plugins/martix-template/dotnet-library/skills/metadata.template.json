@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0",
+  "owner": "<owner>",
+  "styleBaseline": "vercel-labs/agent-skills/react-best-practices",
+  "abstract": "<Short abstract describing the skill scope, expected outcomes, and primary quality focus.>",
+  "references": [
+    "<official-authority-url>"
+  ],
+  "categories": [
+    {
+      "priority": 1,
+      "title": "Compatibility and API evolution",
+      "impact": "CRITICAL",
+      "prefix": "compat"
+    },
+    {
+      "priority": 2,
+      "title": "Targeting and framework strategy",
+      "impact": "HIGH",
+      "prefix": "target"
+    },
+    {
+      "priority": 3,
+      "title": "Dependencies and packaging",
+      "impact": "HIGH",
+      "prefix": "package"
+    },
+    {
+      "priority": 4,
+      "title": "Validation and release readiness",
+      "impact": "HIGH",
+      "prefix": "validate"
+    },
+    {
+      "priority": 5,
+      "title": "Documentation and discoverability",
+      "impact": "MEDIUM",
+      "prefix": "docs"
+    },
+    {
+      "priority": 6,
+      "title": "Advanced interoperability",
+      "impact": "LOW",
+      "prefix": "advanced"
+    }
+  ]
+}

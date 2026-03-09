@@ -13,6 +13,7 @@ purpose: Track resources and requirements used to build and maintain plugin asse
 | Plugin authoring | <URL> | Plugin manifest and packaging choices |
 | Skill authoring | <URL> | Skill file structure and frontmatter |
 | Agent authoring | <URL> | Agent structure and usage model |
+| Vercel skill structure | <URL> | Layered skill-package structure and writing style benchmark |
 | .NET cross-platform targeting | <URL> | TFM strategy and compatibility policy |
 | .NET versioning and breaking changes | <URL> | SemVer and compatibility analysis |
 | .NET dependencies and packaging | <URL> | NuGet dependency strategy and publish quality |
@@ -30,7 +31,12 @@ purpose: Track resources and requirements used to build and maintain plugin asse
 | `./hooks/*.hook.yaml` | Validation gates |
 | `./agents/*.agent.yaml` | Agent execution behavior |
 | `./skills/**/SKILL.md` | Skill context and workflow |
+| `./skills/**/AGENTS.md` | Expanded long-form guide for agents |
+| `./skills/**/README.md` | Skill package maintenance guide |
+| `./skills/**/metadata.json` | Skill package metadata and category registry |
+| `./skills/**/rules/*.md` | Focused rule files and category maps |
 | `./skills/**/references/*.md` | Extended checklists and detailed skill guidance |
+| `./skills/**/evals/*.json` | Repo-native evaluation prompts and assertions |
 | `./prompts/*.prompt.md` | Prompt contract and deliverable shape |
 
 ## Update workflow when resources change
@@ -39,4 +45,3 @@ purpose: Track resources and requirements used to build and maintain plugin asse
 2. Update template files first (if shared behavior changed).
 3. Update concrete plugin files that derive from templates.
 4. Re-run install/discovery checks and plugin validation commands.
-

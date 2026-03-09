@@ -29,3 +29,27 @@ plugins:
     install:
       source: local-marketplace
       marketplace_root: .
+  - name: martix-dotnet-csharp
+    version: 0.1.0
+    phase: 4
+    source_path: src/skills/martix-dotnet-csharp
+    package_type: standalone-skill
+    install:
+      source: local-marketplace
+      marketplace_root: .
+  - name: martix-fastendpoints
+    version: 0.1.0
+    phase: 5
+    source_path: src/skills/martix-fastendpoints
+    package_type: standalone-skill
+    install:
+      source: local-marketplace
+      marketplace_root: .
+  - name: martix-fluentvalidation
+    version: 0.1.0
+    phase: 6
+    source_path: src/skills/martix-fluentvalidation
+    package_type: standalone-skill
+    install:
+      source: local-marketplace
+      marketplace_root: .

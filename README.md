@@ -1,6 +1,7 @@
 # MartiX AI Marketplace for Copilot CLI Plugins
 
-Marketplace for custom MartiX AI Plugins, Agents, Skills, Prompts, Instructions, Hooks, etc.
+Marketplace for custom MartiX AI Plugins, Agents, Skills, Prompts,
+Instructions, Hooks, and related assets.
 
 **Repository:** [https://github.com/MartiXDev/ai-marketplace](https://github.com/MartiXDev/ai-marketplace)
 
@@ -36,19 +37,22 @@ GitHub Copilot
 ## Marketplace architecture (plugin-first)
 
 This repository is a custom Copilot CLI marketplace for reusable MartiX
-plugins.
+plugins and standalone skills.
 
-- Source of truth for installable plugins is `src/plugins/martix-*`.
-- Every plugin owns its own assets (`agents`, `skills`, `prompts`,
-  `instructions`, `hooks`) and manifests (`plugin.yaml`, `plugin.json`,
-  `commands/command-catalog.yaml`, `workflows/workflow-catalog.yaml`).
-- Plugin doesn't have to contain all types of assets, only some of them or even only one can be used
+- Installable marketplace sources can live either under `src/plugins/martix-*`
+  or `src/skills/martix-*`.
+- Use `src/skills/<skill-name>/` as the preferred single-source model when a
+  standalone skill is sufficient.
+- Use `src/plugins/<plugin-name>/` only when the package genuinely needs
+  plugin-scoped assets such as agents, prompts, instructions, hooks, or custom
+  command and workflow catalogs.
+- A plugin source does not have to contain every asset type; only the assets
+  required for that package need to exist.
 - Plugin layout and naming constraints are defined in
   [`docs/plugin-layout.yaml`](docs/plugin-layout.yaml).
 - Shared reusable source templates are stored in
   [`src/plugins/martix-template/`](src/plugins/martix-template/).
-- Optional standalone skills for dual publishing are stored under
-  [`src/skills/`](src/skills/).
+- Standalone skills are stored under [`src/skills/`](src/skills/).
 - Marketplace metadata is tracked in [`marketplace/catalog.yaml`](marketplace/catalog.yaml).
 - Copilot CLI marketplace manifest is tracked in
   [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json).
@@ -79,8 +83,10 @@ Do not create new plugin source assets under `.github`.
   - `instructions/`
   - `hooks/`
   - plugin manifests and command/workflow catalogs
-- Skills remain plugin-local under `src/plugins/<plugin-name>/skills/...`.
-- Optional standalone skill mirrors may be published from `src/skills/...`.
+- Publish directly from `src/skills/<skill-name>/` when the skill stands on its
+  own.
+- Add `src/plugins/<plugin-name>/skills/...` only when a plugin truly needs a
+  plugin-local skill payload in addition to standalone assets.
 
 ## Install and use the marketplace
 
@@ -132,8 +138,8 @@ Notes:
 
 ## Shared template source for plugins
 
-Use [`src/plugins/martix-template/`](src/plugins/martix-template/) when creating or
-refactoring `martix-*` plugins.
+Use [`src/plugins/martix-template/`](src/plugins/martix-template/) when
+creating or refactoring `martix-*` plugins.
 
 `martix-template` currently includes reusable .NET library templates for:
 
@@ -198,19 +204,22 @@ npx skills add <owner>/<skill-name>
 Use this checklist to onboard plugins consistently:
 
 1. Create `src/plugins/martix-<name>/` using the layout in
-   [`docs/plugin-layout.yaml`](docs/plugin-layout.yaml).
-2. Bootstrap from `src/plugins/martix-template/` and then specialize for the target
-   use case.
-3. Keep names lowercase and `martix-` prefixed for plugin directory, plugin
-   name, and component names.
-4. Add plugin metadata in:
+   [`docs/plugin-layout.yaml`](docs/plugin-layout.yaml), or create
+   `src/skills/martix-<name>/` when the package is a standalone skill with no
+   extra plugin-scoped assets.
+2. Bootstrap from `src/plugins/martix-template/` when a real plugin wrapper is
+   needed, then specialize for the target use case.
+3. Keep names lowercase and `martix-` prefixed for plugin directory, skill
+   directory, plugin name, and component names.
+4. Add marketplace metadata in:
    - [`marketplace/catalog.yaml`](marketplace/catalog.yaml)
    - [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json)
-5. Add plugin manifests and assets under the plugin folder:
+5. If you chose a plugin wrapper, add plugin manifests and assets under the
+   plugin folder:
    - `plugin.yaml`, `plugin.json`
    - `agents/`, `skills/`, `prompts/`, `instructions/`, `hooks/`
    - `commands/command-catalog.yaml`, `workflows/workflow-catalog.yaml`
-   Optional: publish standalone skill mirrors from `src/skills/<skill-name>/`.
+   Otherwise, keep the single source under `src/skills/<skill-name>/`.
 6. Validate discovery/install:
    - `copilot plugin marketplace browse martix-ai-marketplace`
    - `copilot plugin install martix-<name>@martix-ai-marketplace`
