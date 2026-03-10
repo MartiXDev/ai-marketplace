@@ -18,6 +18,37 @@ asynchronous, the application must invoke FluentValidation through
   external calls made by validation rules.
 - Assume `ValidateAsync` runs both synchronous and asynchronous rules. Do not add
   a separate synchronous pass before it.
+- Keep the boundary, validator, and downstream service on the same async path:
+
+```csharp
+public sealed class RegisterUserValidator : AbstractValidator<RegisterUserRequest>
+{
+    public RegisterUserValidator(IEmailDirectory emailDirectory)
+    {
+        RuleFor(x => x.Email)
+            .NotEmpty()
+            .MustAsync(async (email, cancellationToken) =>
+                !await emailDirectory.ExistsAsync(email, cancellationToken))
+            .WithMessage("Email is already registered.");
+    }
+}
+
+app.MapPost("/users", async (
+    RegisterUserRequest request,
+    IValidator<RegisterUserRequest> validator,
+    UserService service,
+    CancellationToken cancellationToken) =>
+{
+    var result = await validator.ValidateAsync(request, cancellationToken);
+    if (!result.IsValid)
+    {
+        return Results.ValidationProblem(result.ToDictionary());
+    }
+
+    await service.CreateAsync(request, cancellationToken);
+    return Results.Accepted();
+});
+```
 - Keep async validation near the application boundary so failures are converted
   into the right HTTP or UI result without blocking threads.
 - In ASP.NET Core, prefer manual validation or async-capable filter integration

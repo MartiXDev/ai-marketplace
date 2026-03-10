@@ -19,7 +19,7 @@ description: 'Long-form companion guide for the martix-fluentvalidation standalo
 | Discovery | Quick activation and workstream routing | [SKILL.md](./SKILL.md) |
 | Companion | Cross-workstream guidance, review routes, and maintainer notes | [AGENTS.md](./AGENTS.md) |
 | Rules | 23 atomic FluentValidation decision guides | [Rule section contract](./rules/_sections.md) |
-| References | 10 maps, compatibility notes, and ecosystem notes | [Foundation map](./references/foundation-map.md) |
+| References | 13 reference docs covering quick references, bootstrap recipes, workstream maps, compatibility, and ecosystem notes | [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md) and [Foundation map](./references/foundation-map.md) |
 | Templates | Authoring, research, and comparison scaffolds | [Rule template](./templates/rule-template.md) |
 | Assets | Supporting taxonomy and ordering data | [taxonomy.json](./assets/taxonomy.json) and [section-order.json](./assets/section-order.json) |
 | Metadata | Package identity, inventory, and distribution intent | [metadata.json](./metadata.json) |
@@ -40,6 +40,22 @@ description: 'Long-form companion guide for the martix-fluentvalidation standalo
   when the task is about comparing adapters.
 - Keep review notes concrete at validator, property, collection, entrypoint,
   async boundary, and upgrade-path level.
+
+## Start here for common decisions
+
+- Use a map first when the question is "which FluentValidation path fits?" and
+  a rule first when the question is "what exactly should I change?"
+- Keep the first pass compact: choose the route here, then open the linked rule
+  for the full checklist.
+
+| If you need to choose... | Start here | Then add |
+| --- | --- | --- |
+| Common FluentValidation mistakes or a fast smell test | [FluentValidation anti-patterns quick reference](./references/anti-patterns-quick-reference.md) | Add [Common review routes](#common-review-routes) and the closest workstream map when the smell needs deeper source-backed guidance |
+| Manual validation vs filter integration vs legacy MVC auto-validation | [FluentValidation integration map](./references/integration-map.md) | [FluentValidation ASP.NET Core application integration](./rules/integration-aspnet-core.md), [FluentValidation async validation integration](./rules/integration-async-validation.md), and [FluentValidation web bootstrap recipes](./references/web-bootstrap-recipes.md) |
+| Controller or Minimal API bootstrap shape | [FluentValidation web bootstrap recipes](./references/web-bootstrap-recipes.md) | [FluentValidation integration map](./references/integration-map.md) and [FluentValidation ASP.NET Core application integration](./rules/integration-aspnet-core.md) |
+| Validator test vs boundary or integration test | [FluentValidation testing map](./references/testing-map.md) | [FluentValidation validator test helper usage](./rules/testing-validator-testhelper.md), [FluentValidation testing integration boundaries](./rules/testing-integration-boundaries.md), and [FluentValidation testing bootstrap recipes](./references/testing-bootstrap-recipes.md) |
+| Message text vs error code vs severity vs custom state | [FluentValidation runtime metadata and localization map](./references/runtime-metadata-map.md) | [FluentValidation severity, error codes, and custom state](./rules/runtime-severity-error-codes-state.md) and [FluentValidation localization and language manager](./rules/runtime-localization-language-manager.md) |
+| Async validation bug or sync-over-async risk | [FluentValidation integration map](./references/integration-map.md) | [FluentValidation async validation integration](./rules/integration-async-validation.md), [FluentValidation testing map](./references/testing-map.md), and [FluentValidation anti-patterns quick reference](./references/anti-patterns-quick-reference.md) |
 
 ## Workstream playbook
 
@@ -113,14 +129,23 @@ description: 'Long-form companion guide for the martix-fluentvalidation standalo
 - Open this workstream for DI registration, ASP.NET Core integration, MVC or
   Razor Pages validation boundaries, Minimal APIs, async entrypoints, and
   Blazor-adapter evaluation.
-- Start with
+- If the first hesitation is manual validation versus filter-based integration
+  versus legacy MVC auto-validation, scan the
+  [FluentValidation integration map](./references/integration-map.md) before
+  opening the rule set.
+- Start with the
+  [FluentValidation integration map](./references/integration-map.md) for
+  boundary choice, then add
   [FluentValidation DI registration and discovery](./rules/integration-di-registration.md),
   [FluentValidation ASP.NET Core application integration](./rules/integration-aspnet-core.md),
   and
   [FluentValidation async validation integration](./rules/integration-async-validation.md).
-- Pair with the
-  [FluentValidation integration map](./references/integration-map.md), then add
-  the [FluentValidation Blazor ecosystem note](./references/blazor-ecosystem-note.md)
+- Use
+  [FluentValidation web bootstrap recipes](./references/web-bootstrap-recipes.md)
+  when the task needs copy-ready DI registration, controller, or Minimal API
+  skeletons.
+- Add the
+  [FluentValidation Blazor ecosystem note](./references/blazor-ecosystem-note.md)
   only when the task explicitly reaches Blazor.
 - Review questions:
   - Is validation running at the intended boundary: manual application code,
@@ -155,13 +180,16 @@ description: 'Long-form companion guide for the martix-fluentvalidation standalo
 - Open this workstream for severity, error codes, custom state, localized
   messages, `LanguageManager`, and validation metadata that downstream systems
   consume.
-- Start with
+- If the first hesitation is message text versus error code versus severity
+  versus custom state, scan the
+  [FluentValidation runtime metadata and localization map](./references/runtime-metadata-map.md)
+  before opening the rule pair.
+- Start with the
+  [FluentValidation runtime metadata and localization map](./references/runtime-metadata-map.md)
+  for the quick role split, then add
   [FluentValidation severity, error codes, and custom state](./rules/runtime-severity-error-codes-state.md)
   and
   [FluentValidation localization and language manager](./rules/runtime-localization-language-manager.md).
-- Pair with the
-  [FluentValidation runtime metadata and localization map](./references/runtime-metadata-map.md)
-  when the validation contract needs to stay machine-readable across locales.
 - Review questions:
   - Are severity, error codes, and custom state used for stable downstream
     handling instead of parsing message text?
@@ -174,13 +202,17 @@ description: 'Long-form companion guide for the martix-fluentvalidation standalo
 - Open this workstream for validator black-box tests, `FluentValidation.TestHelper`,
   async test paths, boundary stubs, DI registration checks, and application
   integration tests.
-- Start with
+- If the first hesitation is validator-test coverage versus framework-boundary
+  testing, scan the [FluentValidation testing map](./references/testing-map.md)
+  before opening the rule pair.
+- Start with the [FluentValidation testing map](./references/testing-map.md) for
+  layer choice, then add
   [FluentValidation validator test helper usage](./rules/testing-validator-testhelper.md)
   and
   [FluentValidation testing integration boundaries](./rules/testing-integration-boundaries.md).
-- Pair with the [FluentValidation testing map](./references/testing-map.md) for
-  the official source trail behind validator-focused tests versus application
-  entrypoint tests.
+- Use
+  [FluentValidation testing bootstrap recipes](./references/testing-bootstrap-recipes.md)
+  when the task needs copy-ready validator-test or boundary-test scaffolds.
 - Review questions:
   - Does the scenario need validator tests, application integration tests, or
     both?
@@ -215,14 +247,24 @@ description: 'Long-form companion guide for the martix-fluentvalidation standalo
 | New validator for a model or DTO | [FluentValidation validator basics](./rules/foundation-validator-basics.md) | [Null, empty, and presence validators](./rules/validators-null-empty.md), [Collections and composition](./rules/foundation-collections-composition.md), [Validator test helper usage](./rules/testing-validator-testhelper.md) |
 | Required fields, comparison rules, or string constraints | [FluentValidation built-in validators map](./references/built-in-validators-map.md) | [Messages and placeholders](./rules/configuration-messages-placeholders.md), [Property names and paths](./rules/configuration-property-names-paths.md) |
 | RuleSets, conditions, or fail-fast behavior | [FluentValidation rule configuration map](./references/rule-configuration-map.md) | [Conditions and RuleSets](./rules/execution-conditions-rulesets.md), [Cascade, inclusion, and dependent rules](./rules/execution-cascade-dependent-inclusion.md), [Testing integration boundaries](./rules/testing-integration-boundaries.md) |
-| ASP.NET Core or Minimal API integration | [FluentValidation ASP.NET Core application integration](./rules/integration-aspnet-core.md) | [DI registration and discovery](./rules/integration-di-registration.md), [Async validation integration](./rules/integration-async-validation.md), [Testing integration boundaries](./rules/testing-integration-boundaries.md) |
-| Async validation bug or sync-over-async review | [FluentValidation async validation integration](./rules/integration-async-validation.md) | [Testing map](./references/testing-map.md), [Current upgrade baseline](./rules/upgrade-current-baseline.md), [ASP.NET Core application integration](./rules/integration-aspnet-core.md) |
+| ASP.NET Core or Minimal API integration | [Integration map](./references/integration-map.md) | [Web bootstrap recipes](./references/web-bootstrap-recipes.md), [ASP.NET Core integration](./rules/integration-aspnet-core.md), [DI registration](./rules/integration-di-registration.md), [Async validation](./rules/integration-async-validation.md), and [integration-boundary tests](./rules/testing-integration-boundaries.md) |
+| Async validation bug or sync-over-async review | [Integration map](./references/integration-map.md) | [Async validation](./rules/integration-async-validation.md), [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md), [Testing map](./references/testing-map.md), and [ASP.NET Core integration](./rules/integration-aspnet-core.md) |
+| Validator test or boundary-test design | [FluentValidation testing map](./references/testing-map.md) | [Testing bootstrap recipes](./references/testing-bootstrap-recipes.md), [FluentValidation validator test helper usage](./rules/testing-validator-testhelper.md), and [FluentValidation testing integration boundaries](./rules/testing-integration-boundaries.md) |
+| Common mistake or smell-test review | [FluentValidation anti-patterns quick reference](./references/anti-patterns-quick-reference.md) | [FluentValidation integration map](./references/integration-map.md), [FluentValidation testing map](./references/testing-map.md), or [FluentValidation runtime metadata and localization map](./references/runtime-metadata-map.md) |
 | Custom validator or reusable extension design | [FluentValidation custom validator selection](./rules/extensibility-custom-validators.md) | [Reusable property validators and SetValidator](./rules/extensibility-property-validators.md), [Built-in validators map](./references/built-in-validators-map.md), [Validator test helper usage](./rules/testing-validator-testhelper.md) |
-| Error metadata or localization contract review | [FluentValidation severity, error codes, and custom state](./rules/runtime-severity-error-codes-state.md) | [Localization and language manager](./rules/runtime-localization-language-manager.md), [Messages and placeholders](./rules/configuration-messages-placeholders.md), [Property names and paths](./rules/configuration-property-names-paths.md) |
+| Error metadata or localization review | [Runtime metadata map](./references/runtime-metadata-map.md) | [Severity, codes, and state](./rules/runtime-severity-error-codes-state.md), [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md), [Localization](./rules/runtime-localization-language-manager.md), and [Property paths](./rules/configuration-property-names-paths.md) |
 | Major-version upgrade planning | [FluentValidation upgrade map](./references/upgrade-map.md) | [Compatibility matrix](./references/compatibility-matrix.md), [Current upgrade baseline](./rules/upgrade-current-baseline.md), [Upgrade breaking changes history](./rules/upgrade-breaking-changes-history.md) |
 | Blazor adapter evaluation | [FluentValidation Blazor ecosystem note](./references/blazor-ecosystem-note.md) | [Integration map](./references/integration-map.md), [Async validation integration](./rules/integration-async-validation.md), [DI registration and discovery](./rules/integration-di-registration.md) |
 
-## Reference map index
+## Reference index
+
+### Quick references and recipes
+
+- [FluentValidation anti-patterns quick reference](./references/anti-patterns-quick-reference.md)
+- [FluentValidation web bootstrap recipes](./references/web-bootstrap-recipes.md)
+- [FluentValidation testing bootstrap recipes](./references/testing-bootstrap-recipes.md)
+
+### Maps and notes
 
 - [FluentValidation foundation map](./references/foundation-map.md)
 - [FluentValidation built-in validators map](./references/built-in-validators-map.md)

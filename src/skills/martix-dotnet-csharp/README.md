@@ -2,15 +2,14 @@
 
 `martix-dotnet-csharp` is the canonical standalone-first source package for the
 MartiX .NET 10+ and C# 14+ skill. It stores the authored rule library,
-reference maps, templates, and machine-readable taxonomy that future entrypoint
-files and Copilot CLI marketplace wrappers should consume.
+reference docs, templates, and machine-readable taxonomy that Copilot CLI and
+marketplace packaging should consume.
 
 This folder already contains the authored support library under
 [`rules/`](./rules), [`references/`](./references),
-[`templates/`](./templates), and [`assets/`](./assets). The final entrypoint
-files `SKILL.md` and `AGENTS.md` are authored separately, so the install flows
-below describe the intended release path and required package shape instead of
-promising that an unfinished working tree snapshot is already installable.
+[`templates/`](./templates), and [`assets/`](./assets), plus the current
+entrypoints `SKILL.md` and `AGENTS.md`. The install flows below describe the
+intended release path and current package shape.
 
 - Canonical source root: `src\skills\martix-dotnet-csharp`
 - Primary install surface: standalone `skills` CLI
@@ -22,7 +21,7 @@ promising that an unfinished working tree snapshot is already installable.
 | Path | Purpose |
 | --- | --- |
 | [`rules/`](./rules) | Nineteen topic files plus shared rule scaffolding for language, SDK, runtime, async, design, web, data, testing, diagnostics, and security guidance. |
-| [`references/`](./references) | Nine source maps that keep the rule library traceable back to the approved brief and official documentation families. |
+| [`references/`](./references) | Thirteen reference docs covering source boundaries, quick-reference guides, bootstrap recipes, and traceable source maps. |
 | [`templates/`](./templates) | Maintainer scaffolds for new rules, research packs, and comparison work. |
 | [`assets/`](./assets) | Machine-readable taxonomy and ordering data used to keep the package consistent as the library grows. |
 | [`metadata.json`](./metadata.json) | Package identity, taxonomy summary, distribution notes, and release-facing reference lists. |
@@ -49,9 +48,8 @@ Use the standalone flow as the primary install surface for this package.
 - Official docs do **not** currently show `npx skill add <source>`.
 - Because this repository keeps the skill under `src\skills\...`, prefer a
   direct folder path or direct GitHub tree URL instead of repo-root discovery.
-- The target source must contain `SKILL.md` at install time. Until that file is
-  present in the chosen source, treat these commands as release instructions,
-  not as a promise about the current authoring snapshot.
+- The target source must contain `SKILL.md` at install time, which this package
+  now does.
 
 ```powershell
 npx skills add .\src\skills\martix-dotnet-csharp -a github-copilot -y
@@ -174,4 +172,4 @@ with the same name.
 | Standalone install looks linked instead of copied | The `skills` CLI uses symlink-based installs by default | Re-run the install with `--copy` when you need a copied layout. |
 | Plugin install succeeds but the skill still does not appear | A same-name standalone install is taking precedence | Remove the standalone copy or test the plugin in a clean environment. |
 | Marketplace removal fails | Installed plugins still depend on the registered marketplace | Uninstall `martix-dotnet-csharp` first, then remove the marketplace, or use `--force` intentionally. |
-| Install commands fail because the skill is missing an entrypoint | `SKILL.md` has not been added to the source yet | Finish the entrypoint authoring step or install from a published source that already includes `SKILL.md`. |
+| Install commands fail because the chosen source is missing an entrypoint | The install source does not contain `SKILL.md` at its root | Install from `src\skills\martix-dotnet-csharp` or another published source that already includes `SKILL.md`. |

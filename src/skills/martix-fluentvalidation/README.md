@@ -2,8 +2,8 @@
 
 `martix-fluentvalidation` is the canonical standalone-first source package for
 the MartiX FluentValidation skill. It stores the authored entrypoints, rule
-library, reference maps, templates, and registration-ready metadata that direct
-standalone installs should consume from this folder.
+library, reference library, templates, and registration-ready metadata that
+direct standalone installs should consume from this folder.
 
 - Canonical source root: `src\skills\martix-fluentvalidation`
 - Primary install surface: standalone `skills` CLI
@@ -17,7 +17,7 @@ standalone installs should consume from this folder.
 | [SKILL.md](./SKILL.md) | Activation router |
 | [AGENTS.md](./AGENTS.md) | Companion guide |
 | [rules/](./rules) | 23 rule files plus support scaffolds |
-| [references/](./references) | 10 workstream maps, compatibility, and ecosystem notes |
+| [references/](./references) | 13 quick references, recipes, workstream maps, compatibility, and ecosystem notes |
 | [templates/](./templates) | Author scaffolds |
 | [assets/](./assets) | Supporting taxonomy and ordering data |
 | [metadata.json](./metadata.json) | Package metadata and distribution notes |
@@ -26,9 +26,11 @@ standalone installs should consume from this folder.
 
 - The shared rule contract lives in
   [rules/_sections.md](./rules/_sections.md).
-- The primary entry maps live under [references/](./references):
-  foundation, built-in validators, rule configuration, integration,
-  extensibility, runtime metadata, testing, and upgrade guidance.
+- The reference surface under [references/](./references) includes the
+  [anti-patterns quick reference](./references/anti-patterns-quick-reference.md),
+  [web bootstrap recipes](./references/web-bootstrap-recipes.md),
+  [testing bootstrap recipes](./references/testing-bootstrap-recipes.md), the
+  workstream maps, the compatibility matrix, and the Blazor ecosystem note.
 - The registration-ready inventory lives in
   [metadata.json](./metadata.json).
 - When marketplace registration is added later, point it directly at this folder

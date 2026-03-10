@@ -24,6 +24,43 @@ and filter-based automation only when the application deliberately opts in.
 - If using FluentValidation 11.1 or newer, `ValidationResult.ToDictionary()` can
   power `Results.ValidationProblem(...)`. For older versions, provide the
   equivalent dictionary mapping explicitly.
+- A compact manual boundary keeps the validation trigger and HTTP translation
+  explicit:
+
+```csharp
+[HttpPost("/people")]
+public async Task<IActionResult> Create(
+    [FromBody] CreatePersonRequest request,
+    [FromServices] IValidator<CreatePersonRequest> validator,
+    CancellationToken cancellationToken)
+{
+    var result = await validator.ValidateAsync(request, cancellationToken);
+
+    if (!result.IsValid)
+    {
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+        }
+
+        return ValidationProblem(ModelState);
+    }
+
+    return Accepted();
+}
+
+app.MapPost("/people", async (
+    CreatePersonRequest request,
+    IValidator<CreatePersonRequest> validator,
+    CancellationToken cancellationToken) =>
+{
+    var result = await validator.ValidateAsync(request, cancellationToken);
+
+    return !result.IsValid
+        ? Results.ValidationProblem(result.ToDictionary())
+        : Results.Accepted();
+});
+```
 - Treat the MVC validation-pipeline integration from
   `FluentValidation.AspNetCore` as legacy-only guidance:
   - it is MVC and Razor Pages only,

@@ -33,6 +33,27 @@ metadata to `ValidationFailure` instances.
   such as internal categories, remediation hints, or downstream mapping keys.
   Keep the state compact and structured enough that consumers do not need to
   parse message text.
+- When metadata itself is part of the contract, keep the code stable, the
+  severity deliberate, and the state structured:
+
+```csharp
+public sealed record ValidationMetadata(
+    string Category,
+    string RemediationCode);
+
+RuleFor(x => x.ExternalId)
+    .NotEmpty()
+    .WithMessage("ExternalId is required before submission.")
+    .WithErrorCode("Orders.ExternalId.Missing")
+    .WithSeverity(x => x.IsDraft ? Severity.Warning : Severity.Error)
+    .WithState(x => new ValidationMetadata(
+        "Orders",
+        x.IsDraft ? "CollectBeforeSubmit" : "BlockSubmission"));
+```
+
+- This still produces a `ValidationFailure`; consumers can inspect
+  `ErrorCode`, `Severity`, and `CustomState` directly instead of parsing the
+  message text.
 - Assume `ValidationFailure.CustomState` is `null` unless the rule explicitly
   calls `WithState(...)`. Consumers should handle the absence of custom state
   safely.
