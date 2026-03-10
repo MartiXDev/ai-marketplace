@@ -7,7 +7,7 @@ standalone skill installs should consume directly.
 
 - Canonical source root: `src\skills\martix-powershell`
 - Primary install surface: standalone `skills` CLI
-- Secondary install surface: direct Copilot marketplace registration (pending)
+- Secondary install surface: Copilot CLI plugin marketplace
 - Discovery key: `martix-powershell`
 
 ## Package structure
@@ -62,6 +62,28 @@ npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-powershell -a g
 To use a GitHub tree URL, use the direct path to the `martix-powershell`
 folder in the repository.
 
+## Copilot CLI plugin marketplace flow
+
+Use the marketplace flow against the same standalone source package. The
+marketplace entry points directly at `src\skills\martix-powershell`.
+
+```powershell
+copilot plugin marketplace add MartiXDev/ai-marketplace
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin install martix-powershell@martix-ai-marketplace
+```
+
+Only the following slash-command equivalents are documented in the reviewed
+research, so keep marketplace browsing as a shell command for now.
+
+```text
+/plugin marketplace add MartiXDev/ai-marketplace
+/plugin marketplace list
+/plugin install martix-powershell@martix-ai-marketplace
+/plugin marketplace remove martix-ai-marketplace
+```
+
 ## Verification
 
 ## Standalone validation
@@ -75,6 +97,16 @@ npx skills list
 
 Expect to see an installed entry named `martix-powershell` after a
 successful install.
+
+## Marketplace validation
+
+Verify marketplace registration and plugin installation with these commands:
+
+```powershell
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin list
+```
 
 ## Update
 
@@ -98,8 +130,8 @@ Copilot deduplicates by the skill `name` declared in `SKILL.md`, not by folder
 path. A project or personal standalone install can load before a later
 marketplace-delivered copy with the same name.
 
-- A standalone `martix-powershell` install can shadow a future direct marketplace
-  registration of `martix-powershell`.
+- A standalone `martix-powershell` install can shadow the marketplace version of
+  `martix-powershell`.
 - For marketplace validation, use a clean environment or remove the standalone
   copy first.
 - If both surfaces must coexist, the eventual package names must stay distinct.

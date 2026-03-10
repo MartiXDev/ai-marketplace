@@ -34,7 +34,7 @@ GitHub Copilot
 
 - [Create Custom Agents for CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli)
 
-## Marketplace architecture (plugin-first)
+## Marketplace architecture (hybrid source model)
 
 This repository is a custom Copilot CLI marketplace for reusable MartiX
 plugins and standalone skills.

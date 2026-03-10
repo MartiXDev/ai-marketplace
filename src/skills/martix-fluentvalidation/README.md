@@ -7,7 +7,7 @@ direct standalone installs should consume from this folder.
 
 - Canonical source root: `src\skills\martix-fluentvalidation`
 - Primary install surface: standalone `skills` CLI
-- Future secondary install surface: direct Copilot marketplace registration
+- Secondary install surface: Copilot CLI plugin marketplace
 - Discovery key: `martix-fluentvalidation`
 
 ## Package structure
@@ -33,8 +33,8 @@ direct standalone installs should consume from this folder.
   workstream maps, the compatibility matrix, and the Blazor ecosystem note.
 - The registration-ready inventory lives in
   [metadata.json](./metadata.json).
-- When marketplace registration is added later, point it directly at this folder
-  instead of duplicating the package elsewhere in the repository.
+- Marketplace registration points directly at this folder as the single source
+  of truth.
 
 ## Installation
 
@@ -61,6 +61,28 @@ npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-fluentvalidatio
 To use a GitHub tree URL, use the direct path to the
 `martix-fluentvalidation` folder in the repository.
 
+## Copilot CLI plugin marketplace flow
+
+Use the marketplace flow against the same standalone source package. The
+marketplace entry points directly at `src\skills\martix-fluentvalidation`.
+
+```powershell
+copilot plugin marketplace add MartiXDev/ai-marketplace
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin install martix-fluentvalidation@martix-ai-marketplace
+```
+
+Only the following slash-command equivalents are documented in the reviewed
+research, so keep marketplace browsing as a shell command for now.
+
+```text
+/plugin marketplace add MartiXDev/ai-marketplace
+/plugin marketplace list
+/plugin install martix-fluentvalidation@martix-ai-marketplace
+/plugin marketplace remove martix-ai-marketplace
+```
+
 ## Verification
 
 ## Standalone validation
@@ -74,6 +96,16 @@ npx skills list
 
 Expect to see an installed entry named `martix-fluentvalidation` after a
 successful install.
+
+## Marketplace validation
+
+Verify marketplace registration and plugin installation with these commands:
+
+```powershell
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin list
+```
 
 ## Update
 
@@ -94,10 +126,10 @@ Add `-g` when removing a global standalone install.
 ## Discovery precedence and same-name conflicts
 
 Copilot deduplicates by the skill `name` declared in `SKILL.md`, not by folder
-path. A project or personal standalone install can load before a later direct
-marketplace registration with the same skill name.
+path. A project or personal standalone install can load before a later
+marketplace-delivered copy with the same skill name.
 
-- A standalone `martix-fluentvalidation` install can shadow a future marketplace
+- A standalone `martix-fluentvalidation` install can shadow the marketplace
   version of `martix-fluentvalidation`.
 - For marketplace validation, use a clean environment or remove the standalone
   copy first.

@@ -46,14 +46,17 @@ Use the standalone flow as the primary install surface for this package.
 
 - Official docs currently show `npx skills add <source>`.
 - Official docs do **not** currently show `npx skill add <source>`.
-- Because this repository keeps the skill under `src\skills\...`, prefer a
-  direct folder path or direct GitHub tree URL instead of repo-root discovery.
+- Because this repository keeps the skill under `src\skills\...`, prefer an
+  absolute folder path or direct GitHub tree URL instead of repo-root
+  discovery. In this environment, a Windows relative path such as
+  `.\src\skills\martix-dotnet-csharp` is treated like a git source by the
+  `skills` CLI and fails preview or install.
 - The target source must contain `SKILL.md` at install time, which this package
-  now does.
+  already does.
 
 ```powershell
-npx skills add .\src\skills\martix-dotnet-csharp -a github-copilot -y
-npx skills add .\src\skills\martix-dotnet-csharp -a github-copilot --copy -y
+npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-dotnet-csharp -a github-copilot -y
+npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-dotnet-csharp -a github-copilot --copy -y
 npx skills add https://github.com/MartiXDev/ai-marketplace/tree/main/src/skills/martix-dotnet-csharp -a github-copilot -y
 ```
 
@@ -87,7 +90,7 @@ research, so keep marketplace browsing as a shell command for now.
 Preview or verify the standalone package with these commands:
 
 ```powershell
-npx skills add .\src\skills\martix-dotnet-csharp --list
+npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-dotnet-csharp --list
 npx skills list
 ```
 
@@ -169,6 +172,7 @@ with the same name.
 | --- | --- | --- |
 | `npx skill add` fails or resolves the wrong tool | The documented binary is `skills`, not `skill` | Use `npx skills add <source>` exactly as shown in the official docs. |
 | Repo-root install does not discover the package | `src\skills` is not a documented default discovery root | Install from a direct folder path or direct GitHub tree URL to `src\skills\martix-dotnet-csharp`. |
+| Windows relative path is treated like a git source | The `skills` CLI interprets `.\src\skills\...` as a git-like source on Windows | Use the full absolute path instead. |
 | Standalone install looks linked instead of copied | The `skills` CLI uses symlink-based installs by default | Re-run the install with `--copy` when you need a copied layout. |
 | Plugin install succeeds but the skill still does not appear | A same-name standalone install is taking precedence | Remove the standalone copy or test the plugin in a clean environment. |
 | Marketplace removal fails | Installed plugins still depend on the registered marketplace | Uninstall `martix-dotnet-csharp` first, then remove the marketplace, or use `--force` intentionally. |
