@@ -1,6 +1,6 @@
 ---
 name: martix-fluentvalidation
-description: Standalone-first FluentValidation guidance for validator authoring, built-in validator selection, RuleSets and cascade behavior, ASP.NET Core integration, async validation, extensibility, localization, testing, and upgrade planning. Use when building or reviewing FluentValidation usage in .NET applications.
+description: Standalone-first FluentValidation guidance for `AbstractValidator<T>` authoring, built-in validator selection, RuleSets and cascade behavior, `ValidateAsync(...)`, `ValidationProblem` mapping, ASP.NET Core integration, `FluentValidation.TestHelper`, error codes, severity, custom state, localization, extensibility, and FluentValidation 11/12 upgrade planning. Use when writing, reviewing, debugging, testing, or upgrading FluentValidation usage in .NET applications.
 license: Complete terms in LICENSE.txt
 ---
 
@@ -21,8 +21,79 @@ license: Complete terms in LICENSE.txt
   property validators.
 - Tune RuleSets, conditions, cascade behavior, messages, property paths, and
   downstream validation metadata.
-- Review ASP.NET Core integration, async validation, localization, testing, or
-  upgrade decisions.
+- Review `ValidateAsync(...)` call paths, API-boundary mapping with
+  `ValidationProblem`, `FluentValidation.TestHelper` coverage, runtime metadata,
+  or FluentValidation 11/12 upgrade decisions.
+
+## Quick-start defaults
+
+Use this section for the first pass, then move into the workstream rules and
+maps below for the specific change.
+
+### Write a new validator
+
+- Start with [FluentValidation validator basics](./rules/foundation-validator-basics.md)
+  and the
+  [FluentValidation built-in validators map](./references/built-in-validators-map.md).
+- Add
+  [FluentValidation collections and composition](./rules/foundation-collections-composition.md)
+  when the validator nests child validators or collection rules.
+
+### Validate at an API boundary
+
+- Start with
+  [FluentValidation ASP.NET Core application integration](./rules/integration-aspnet-core.md)
+  and [Web bootstrap recipes](./references/web-bootstrap-recipes.md).
+- Prefer manual validation at the boundary and translate failures with
+  `ValidationProblem` or `Results.ValidationProblem(...)`.
+- Add
+  [FluentValidation async validation integration](./rules/integration-async-validation.md)
+  when any rule or dependency is async.
+
+### Test a validator
+
+- Start with
+  [FluentValidation validator test helper usage](./rules/testing-validator-testhelper.md)
+  and [Testing bootstrap recipes](./references/testing-bootstrap-recipes.md).
+- Use `FluentValidation.TestHelper` black-box tests first with `TestValidate`
+  or `TestValidateAsync`.
+
+### Review an async validation bug
+
+- Start with
+  [FluentValidation async validation integration](./rules/integration-async-validation.md)
+  and
+  [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md).
+- Check that callers use `ValidateAsync(...)` and pass the ambient
+  `CancellationToken`.
+
+### Plan an upgrade
+
+- Start with
+  [FluentValidation current upgrade baseline](./rules/upgrade-current-baseline.md),
+  [FluentValidation upgrade breaking changes history](./rules/upgrade-breaking-changes-history.md),
+  and the
+  [FluentValidation compatibility matrix](./references/compatibility-matrix.md).
+- Use the [FluentValidation upgrade map](./references/upgrade-map.md) to scope
+  affected validators, integration paths, and tests before editing.
+
+## Default patterns
+
+| Concern | Default | Escalate when |
+| --- | --- | --- |
+| API boundary validation | Prefer manual validation at the boundary before legacy MVC auto-validation, then map failures to `ValidationProblem` or `Results.ValidationProblem(...)`. | Review legacy MVC auto-validation only for existing code or migration-constrained paths. |
+| Async rules | Use `ValidateAsync(...)` and pass the ambient `CancellationToken` whenever any rule or dependency is async. | Keep `Validate(...)` only when the validator and its dependencies are fully synchronous. |
+| Rule authoring | Choose built-in validators before `Must`, `Custom`, or reusable custom validators. | Extend only when the built-in validators cannot express the contract clearly. |
+| Testing | Start with validator black-box tests via `FluentValidation.TestHelper` before framework-boundary tests. | Add framework-boundary tests only when DI wiring, filters, controllers, or Minimal API behavior is part of the contract. |
+
+## Bootstrap and quick review references
+
+- Use these quick references for copy-ready starting points or a fast smell
+  test, then return to the rule library for the deeper source-backed guidance.
+- References:
+  - [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md)
+  - [Web bootstrap recipes](./references/web-bootstrap-recipes.md)
+  - [Testing bootstrap recipes](./references/testing-bootstrap-recipes.md)
 
 ## Start with the closest workstream
 

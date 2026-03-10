@@ -6,6 +6,11 @@ Provide a compact source map for FluentValidation testing so rule files can stay
 decision-oriented while still pointing back to the official docs that justify
 validator-level and application-boundary testing guidance.
 
+## Start here when
+
+- The main hesitation is test-layer choice rather than assertion syntax.
+- You need a quick route for validator tests versus framework-boundary tests.
+
 ## Normative core guidance
 
 - Treat validators as black boxes. Pass representative models into a real
@@ -27,6 +32,15 @@ validator-level and application-boundary testing guidance.
   `MustAsync`, `CustomAsync`, or `WhenAsync` must be exercised with
   `ValidateAsync`/`TestValidateAsync`, and ASP.NET's legacy validation-pipeline
   auto-validation is the wrong boundary for those validators.
+
+## Use this test layer when...
+
+| Need | Prefer | Why |
+| --- | --- | --- |
+| Prove rule behavior, property paths, or failure metadata for one validator | Validator test with `TestValidate` or `TestValidateAsync` | Fastest black-box coverage with the least framework noise |
+| Prove DI registration, endpoint or controller wiring, filter behavior, or HTTP/model-state translation | Application-boundary integration test | Exercises the real entrypoint and keeps framework behavior in one place |
+| Keep a higher-level test focused while substituting `IValidator<T>` intentionally | `InlineValidator<T>` boundary stub | Produces real FluentValidation failures without mocking validator internals |
+| The validator contains `MustAsync`, `CustomAsync`, or `WhenAsync` | The async version of the chosen layer | Keeps the test path aligned with `ValidateAsync(...)` and catches sync-over-async mistakes |
 
 ## Official docs at a glance
 

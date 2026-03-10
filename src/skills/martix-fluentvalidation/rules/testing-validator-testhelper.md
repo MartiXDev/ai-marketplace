@@ -30,6 +30,34 @@ details.
   error code, and any additional metadata that is part of the contract.
 - Keep test data explicit and input-driven. Prefer separate tests for distinct
   valid, invalid, and async behaviors over branching logic inside a single test.
+- Keep examples focused on observable failures:
+
+```csharp
+[Fact]
+public void Name_is_required()
+{
+    var validator = new PersonValidator();
+
+    var result = validator.TestValidate(new Person { Name = "" });
+
+    result.ShouldHaveValidationErrorFor(x => x.Name)
+        .WithErrorCode("NotEmptyValidator")
+        .Only();
+}
+
+[Fact]
+public async Task Email_must_be_unique()
+{
+    var validator = new RegisterUserValidator(new AlwaysTakenEmailDirectory());
+
+    var result = await validator.TestValidateAsync(
+        new RegisterUserRequest { Email = "taken@example.com" });
+
+    result.ShouldHaveValidationErrorFor(x => x.Email)
+        .WithErrorCode("Users.Email.NotUnique")
+        .Only();
+}
+```
 
 ## Avoid
 

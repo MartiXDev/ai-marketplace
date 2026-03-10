@@ -5,6 +5,22 @@
 Map the FluentValidation runtime metadata and localization behaviors in this
 workstream to the official documentation pages that justify the rules.
 
+## Start here when
+
+- The main hesitation is which validation output field should carry user-facing
+  text versus machine-readable metadata.
+- You need a fast answer for message text versus error code versus severity
+  versus custom state before opening the linked rules.
+
+## Quick metadata summary
+
+| Concern | Prefer | Why |
+| --- | --- | --- |
+| User-facing or localized explanation with placeholders | Error message text via `WithMessage(...)` | Display-oriented and culture-sensitive; do not parse it for machine logic |
+| Stable machine-readable reason or integration key | Error code via `WithErrorCode(...)` | Durable contract for consumers and also participates in message lookup |
+| Triage level or handling emphasis | Severity via `WithSeverity(...)` | Distinguishes `Error`, `Warning`, or `Info` without changing the underlying error code |
+| Structured extra context for downstream handling | Custom state via `WithState(...)` | Carries machine-readable payload without overloading message text or error codes |
+
 ## Rule coverage
 
 - **Severity, error codes, and custom state**

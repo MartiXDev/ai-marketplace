@@ -6,6 +6,20 @@ Map the FluentValidation integration guidance in this workstream back to the
 official docs first, while clearly separating legacy or third-party ecosystem
 guidance.
 
+## Start here when
+
+- The main hesitation is validation-boundary choice rather than DI mechanics.
+- You need a fast route for manual validation versus filter integration versus
+  legacy MVC auto-validation before opening the linked rules.
+
+## Quick decision aid
+
+| If this is true | Prefer | Why |
+| --- | --- | --- |
+| New application code, explicit controller or endpoint ownership, or any validator may use async rules | Manual validation in application code | First-party default, keeps `ValidateAsync(...)` available, and makes `ValidationProblem` or `Results.ValidationProblem(...)` mapping explicit |
+| You want automatic HTTP-boundary execution but still need async-capable validation at controllers or Minimal APIs | Async-capable filter integration (ecosystem option) | Keeps validation close to the web boundary without falling back to the synchronous MVC validation pipeline |
+| You are maintaining an existing MVC or Razor Pages app that already depends on the old pipeline and all validators stay synchronous | Legacy MVC auto-validation only as a migration or legacy path | MVC-only, not async-capable, and no longer the preferred route for new work |
+
 ## Rule coverage
 
 - **Async rule execution and application call paths**
