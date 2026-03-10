@@ -53,3 +53,19 @@ plugins:
     install:
       source: local-marketplace
       marketplace_root: .
+  - name: martix-tunit
+    version: 0.1.0
+    phase: 7
+    source_path: src/skills/martix-tunit
+    package_type: standalone-skill
+    install:
+      source: local-marketplace
+      marketplace_root: .
+  - name: martix-powershell
+    version: 0.1.0-preview.1
+    phase: 8
+    source_path: src/skills/martix-powershell
+    package_type: standalone-skill
+    install:
+      source: local-marketplace
+      marketplace_root: .

@@ -88,6 +88,47 @@
         "standalone-skill"
       ],
       "strict": false
+    },
+    {
+      "name": "martix-tunit",
+      "description": "Standalone TUnit skill package for test authoring, parameterized data-driven tests, lifecycle hooks, parallel-by-default execution, async assertions, dependency injection, mocking, extensibility, and xUnit/NUnit/MSTest migration, registered directly from src/skills.",
+      "version": "0.1.0",
+      "source": "src/skills/martix-tunit",
+      "category": "development",
+      "tags": [
+        "martix",
+        "tunit",
+        "dotnet",
+        "testing",
+        "unit-testing",
+        "parameterized-tests",
+        "parallel-execution",
+        "microsoft-testing-platform",
+        "standalone-skill"
+      ],
+      "strict": false
+    },
+    {
+      "name": "martix-powershell",
+      "description": "Standalone PowerShell cmdlet developer skill package for compiled C# cmdlet authoring and cmdlet-style advanced functions ([CmdletBinding()]), covering base class selection (Cmdlet vs PSCmdlet), parameter declaration and validation, pipeline input/output streaming, error handling (terminating vs non-terminating), confirmation and safety patterns (ShouldProcess/Force/WhatIf), dynamic parameters, and attribute validators, registered directly from src/skills.",
+      "version": "0.1.0-preview.1",
+      "source": "src/skills/martix-powershell",
+      "category": "development",
+      "tags": [
+        "martix",
+        "powershell",
+        "cmdlet",
+        "advanced-function",
+        "csharp",
+        "dotnet",
+        "binary-module",
+        "parameter-validation",
+        "pipeline",
+        "error-handling",
+        "shouldprocess",
+        "standalone-skill"
+      ],
+      "strict": false
     }
   ]
 }
