@@ -8,8 +8,8 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
 - The package follows a layered, standalone-first split:
   `SKILL.md` routes activation, `AGENTS.md` explains how to apply the library,
   `rules\*.md` holds atomic guidance, `references\*.md` maps guidance to
-  approved sources, and `templates\*.md` plus `assets\*.json` keep the package
-  maintainable.
+  approved sources and compact decision aids, and `templates\*.md` plus
+  `assets\*.json` keep the package maintainable.
 - Start with the
   [source index and guardrails](./references/doc-source-index.md) whenever a
   task might widen beyond the approved scope.
@@ -21,7 +21,7 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
 | Discovery | Quick activation and domain routing | [SKILL.md](./SKILL.md) |
 | Companion | Cross-domain guidance and review routes | [AGENTS.md](./AGENTS.md) |
 | Rules | 19 atomic decision guides grouped by domain | [Rule section contract](./rules/_sections.md) |
-| References | 9 Microsoft-backed source maps | [Source index](./references/doc-source-index.md) |
+| References | 13 reference docs: 9 Microsoft-backed source maps plus 4 quick-reference and recipe guides | [Source index](./references/doc-source-index.md) |
 | Templates | Authoring, research, and comparison scaffolds | [Rule template](./templates/rule-template.md) |
 | Assets | Preferred taxonomy and ordering | [taxonomy.json](./assets/taxonomy.json) and [section-order.json](./assets/section-order.json) |
 
@@ -40,6 +40,23 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
   concurrency primitives.
 - Review testing, diagnostics, and security alongside functional changes instead
   of treating them as cleanup work.
+
+## Start here for common decisions
+
+- Use a map first when the question is "which path fits?" and a rule first when
+  the question is "what exactly should I do?"
+- The map layer stays compact on purpose: make the first choice there, then open
+  the linked rule for the full checklist.
+
+| If you need to choose... | Start here | Then add |
+| --- | --- | --- |
+| Skill scope or source boundary | [Source index and guardrails](./references/doc-source-index.md) | [Common review routes](#common-review-routes) |
+| `Task` vs `ValueTask` | [Async and concurrency map](./references/async-map.md) | [Tasks, ValueTasks, async streams, and API shape](./rules/async-tasks-valuetasks.md) |
+| bounded vs unbounded channels | [Async and concurrency map](./references/async-map.md) | [Concurrency, synchronization, and channels](./rules/async-concurrency-channels.md) |
+| result type vs exception | [Design map](./references/design-map.md) | [Exceptions, validation, and failure contracts](./rules/design-exceptions-validation.md) |
+| `IOptions<T>` vs `IOptionsSnapshot<T>` vs `IOptionsMonitor<T>` | [Web stack map](./references/web-stack-map.md) | [ASP.NET Core application shape](./rules/web-aspnet-core.md) |
+| Minimal APIs vs controllers or middleware route | [Web stack map](./references/web-stack-map.md) | [ASP.NET Core application shape](./rules/web-aspnet-core.md) |
+| new public API surface or DI boundary | [Design map](./references/design-map.md) | [API and type design](./rules/design-api-type-design.md) |
 
 ## Domain playbook
 
@@ -95,6 +112,9 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
 
 - Open this cluster for async APIs, background work, streaming, cancellation,
   contention, coordination, or backpressure.
+- If the first hesitation is `Task` vs `ValueTask` or bounded vs unbounded
+  channels, scan the [Async and concurrency map](./references/async-map.md)
+  before opening the matching rule.
 - Start with
   [Tasks, ValueTasks, async streams, and API shape](./rules/async-tasks-valuetasks.md),
   then add
@@ -113,6 +133,8 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
 
 - Open this cluster for new public APIs, abstractions, DI boundaries, overload
   sets, validation, or exception behavior.
+- If the first hesitation is result shape versus exception semantics, scan the
+  [Design map](./references/design-map.md) before opening the rule pair.
 - Start with [API and type design](./rules/design-api-type-design.md) and pair
   it with
   [Exceptions, validation, and failure contracts](./rules/design-exceptions-validation.md).
@@ -128,6 +150,9 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
 
 - Open this cluster for ASP.NET Core app shape, Minimal APIs, controllers,
   middleware ordering, or outbound HTTP dependencies.
+- If the first hesitation is endpoint style, options lifetime, or where the
+  pipeline decision lives, scan the
+  [Web stack map](./references/web-stack-map.md) before opening the rule.
 - Start with
   [ASP.NET Core application shape](./rules/web-aspnet-core.md) for inbound app
   structure and
@@ -189,10 +214,18 @@ description: 'Long-form companion guide for the martix-dotnet-csharp standalone 
 | EF Core change or query review | [Entity Framework Core](./rules/data-efcore.md) | [Serialization and payload contracts](./rules/data-serialization.md), [Unit and integration testing](./rules/testing-unit-integration.md), [Cancellation and timeouts](./rules/async-cancellation-timeouts.md) |
 | Hot-path optimization | [Memory, spans, and hot-path performance](./rules/runtime-memory-spans.md) | [Collections, concurrency, and immutability](./rules/runtime-collections-immutability.md), [Tasks, ValueTasks, async streams, and API shape](./rules/async-tasks-valuetasks.md) |
 | Background worker or fan-out flow | [Concurrency, synchronization, and channels](./rules/async-concurrency-channels.md) | [Cancellation and timeouts](./rules/async-cancellation-timeouts.md), [Logging, metrics, tracing, and health signals](./rules/diagnostics-logging-tracing.md), [Authentication, authorization, and secure defaults](./rules/security-auth-authz.md) |
+| Choosing `Task` vs `ValueTask` | [Async and concurrency map](./references/async-map.md) | [Tasks, ValueTasks, async streams, and API shape](./rules/async-tasks-valuetasks.md), [Cancellation and timeouts](./rules/async-cancellation-timeouts.md) |
+| Choosing bounded vs unbounded channels | [Async and concurrency map](./references/async-map.md) | [Concurrency, synchronization, and channels](./rules/async-concurrency-channels.md), [Cancellation and timeouts](./rules/async-cancellation-timeouts.md) |
+| Choosing result type vs exception | [Design map](./references/design-map.md) | [Exceptions, validation, and failure contracts](./rules/design-exceptions-validation.md), [API and type design](./rules/design-api-type-design.md) |
+| Choosing an options interface | [Web stack map](./references/web-stack-map.md) | [ASP.NET Core application shape](./rules/web-aspnet-core.md), [Design map](./references/design-map.md) |
 
-## Reference map index
+## Reference index
 
 - [Source index and guardrails](./references/doc-source-index.md)
+- [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md)
+- [Web bootstrap recipes](./references/web-bootstrap-recipes.md)
+- [Testing bootstrap recipes](./references/testing-bootstrap-recipes.md)
+- [Libraries catalog](./references/libraries-catalog.md)
 - [C# language map](./references/csharp-language-map.md)
 - [Dotnet SDK and build map](./references/dotnet-sdk-map.md)
 - [Runtime and BCL map](./references/runtime-bcl-map.md)

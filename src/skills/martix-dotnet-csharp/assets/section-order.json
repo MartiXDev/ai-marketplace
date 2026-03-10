@@ -30,6 +30,10 @@
   ],
   "referenceOrder": [
     "references/doc-source-index.md",
+    "references/anti-patterns-quick-reference.md",
+    "references/web-bootstrap-recipes.md",
+    "references/testing-bootstrap-recipes.md",
+    "references/libraries-catalog.md",
     "references/csharp-language-map.md",
     "references/dotnet-sdk-map.md",
     "references/runtime-bcl-map.md",

@@ -1,6 +1,6 @@
 ---
 name: martix-dotnet-csharp
-description: Standalone-first .NET 10+ and C# 14+ guidance for code review, modernization, refactoring, and scaffolding. Use when working on SDK-style projects, ASP.NET Core, Minimal APIs, EF Core, async flows, diagnostics, testing, security, or modern C# features.
+description: Standalone-first .NET 10+ and C# 14+ guidance for code review, modernization, refactoring, and scaffolding. Use when working on SDK-style projects, ASP.NET Core, minimal APIs, EF Core, async flows, diagnostics, testing, security, or modern C# features. Trigger this skill for questions about the options pattern, TypedResults, `ValidateOnStart()`, HTTP resilience, `WebApplicationFactory`, extension blocks, channels, problem details, middleware ordering, or common app bootstrap defaults.
 license: Complete terms in LICENSE.txt
 ---
 
@@ -20,6 +20,84 @@ license: Complete terms in LICENSE.txt
 - Refactor async code, cancellation flows, or background work.
 - Tune hot paths, spans, collections, or allocation-sensitive code.
 - Review EF Core, JSON contracts, diagnostics, testing, or security defaults.
+- Answer concrete bootstrap questions such as options binding,
+  `ValidateOnStart()`, TypedResults, problem details, `WebApplicationFactory`,
+  HTTP client resilience, extension blocks, or channels.
+
+## Quick-start defaults
+
+Use this section for the first pass, then move into the domain rules and maps
+below for the specific change.
+
+### Minimal `.csproj` baseline
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+```
+
+### Short `Program.cs` bootstrap
+
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services
+    .AddOptions<ApiOptions>()
+    .BindConfiguration(ApiOptions.SectionName)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddProblemDetails();
+builder.Services.AddOpenApi();
+builder.Services.AddHttpClient("weather")
+    .AddStandardResilienceHandler();
+
+var app = builder.Build();
+
+app.UseExceptionHandler();
+
+app.MapGet("/health", () => TypedResults.Ok(new { status = "ok" }));
+
+app.Run();
+
+sealed class ApiOptions
+{
+    public const string SectionName = "Api";
+
+    [Required]
+    public string BaseUrl { get; init; } = string.Empty;
+}
+```
+
+### Middleware ordering reminder
+
+- Put exception handling and problem details early so failures are translated
+  consistently.
+- Run HTTPS, static files, CORS, authentication, authorization, rate limiting,
+  and similar cross-cutting middleware before endpoint mapping.
+- Keep endpoint registration near the end so the request pipeline stays easy to
+  trace.
+
+## Default patterns
+
+| Concern | Default | Escalate when |
+| --- | --- | --- |
+| Web entrypoint | Start with minimal APIs for focused HTTP surfaces. | Use controllers when filters, conventions, or richer MVC features pay off. |
+| HTTP results | Prefer TypedResults and problem details for explicit contracts. | Introduce a result envelope only when the API needs a stable shared error shape. |
+| Configuration | Use the options pattern with validation and `ValidateOnStart()`. | Switch option lifetime or refresh behavior only when the host truly needs it. |
+| Outbound HTTP | Use typed clients with `IHttpClientFactory` and standard HTTP resilience. | Add custom retry, timeout, hedging, or circuit-breaker policy only when measured. |
+| Testing | Start host-level API tests with `WebApplicationFactory<Program>`. | Add narrower unit tests or broader infrastructure tests as the behavior demands. |
+| Concurrency | Use channels for producer-consumer pipelines with backpressure needs. | Use other primitives only when contention or ownership makes channels a poor fit. |
+| Modern C# | Use current toolchain defaults and small readability wins first. | Reach for extension blocks only on .NET 10+ when they reduce noise clearly. |
+| Failure handling | Validate early, throw precise exceptions, and log useful context. | Use alternate result types when failure is expected and not exceptional. |
 
 ## Start with the source boundary
 
@@ -29,6 +107,16 @@ license: Complete terms in LICENSE.txt
 3. Read only the linked rules needed for the current change.
 4. Open [AGENTS.md](./AGENTS.md) for cross-domain review routes and package
    maintenance notes.
+
+## Bootstrap and reference routes
+
+- Use the quick references below when you need copy-ready entrypoint patterns,
+  then return to the rule library for detailed review guidance.
+- References:
+  - [Anti-patterns quick reference](./references/anti-patterns-quick-reference.md)
+  - [Web bootstrap recipes](./references/web-bootstrap-recipes.md)
+  - [Testing bootstrap recipes](./references/testing-bootstrap-recipes.md)
+  - [Libraries catalog](./references/libraries-catalog.md)
 
 ## Rule library by domain
 

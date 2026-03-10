@@ -8,7 +8,7 @@
     "distributionModel": "standalone skill with optional direct Copilot marketplace registration"
   },
   "summary": "Standalone-first MartiX skill package for modern .NET 10+ and C# 14+ engineering guidance.",
-  "abstract": "This package is the canonical source for the MartiX .NET and C# skill. It currently ships the authored rule library, reference maps, templates, and taxonomy assets that future SKILL.md, AGENTS.md, and marketplace wrapper files should build on.",
+  "abstract": "This package is the canonical source for the MartiX .NET and C# skill. It currently ships the authored entrypoints, rule library, quick-reference guides, source maps, templates, and taxonomy assets that marketplace packaging should build on.",
   "compatibility": {
     "primaryTarget": "GitHub Copilot CLI",
     "secondaryTargets": [
@@ -158,9 +158,13 @@
       "rules/diagnostics-logging-tracing.md",
       "rules/security-auth-authz.md"
     ],
-    "referenceCount": 9,
+    "referenceCount": 13,
     "references": [
       "references/doc-source-index.md",
+      "references/anti-patterns-quick-reference.md",
+      "references/web-bootstrap-recipes.md",
+      "references/testing-bootstrap-recipes.md",
+      "references/libraries-catalog.md",
       "references/csharp-language-map.md",
       "references/dotnet-sdk-map.md",
       "references/runtime-bcl-map.md",
@@ -214,6 +218,10 @@
     ],
     "referenceOrder": [
       "references/doc-source-index.md",
+      "references/anti-patterns-quick-reference.md",
+      "references/web-bootstrap-recipes.md",
+      "references/testing-bootstrap-recipes.md",
+      "references/libraries-catalog.md",
       "references/csharp-language-map.md",
       "references/dotnet-sdk-map.md",
       "references/runtime-bcl-map.md",
