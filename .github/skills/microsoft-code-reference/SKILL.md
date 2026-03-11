@@ -1,78 +1,42 @@
 ---
 name: microsoft-code-reference
-description: Look up Microsoft API references, find working code samples, and verify SDK code is correct. Use when working with Azure SDKs, .NET libraries, or Microsoft APIs—to find the right method, check parameters, get working examples, or troubleshoot errors. Catches hallucinated methods, wrong signatures, and deprecated patterns by querying official docs.
+description: 'Verify Microsoft SDK and API usage against official docs and samples. Use whenever requests mention Azure SDKs, Microsoft Graph, .NET libraries, method signatures, overloads, packages, deprecated APIs, auth failures, RBAC, or "is this API call correct?".'
 compatibility: Requires Microsoft Learn MCP Server (https://learn.microsoft.com/api/mcp)
 ---
 
-# Microsoft Code Reference
+## Microsoft Code Reference Router
 
-## Tools
+## When to Use
 
-| Need | Tool | Example |
-|------|------|---------|
-| API method/class lookup | `microsoft_docs_search` | `"BlobClient UploadAsync Azure.Storage.Blobs"` |
-| Working code sample | `microsoft_code_sample_search` | `query: "upload blob managed identity", language: "python"` |
-| Full API reference | `microsoft_docs_fetch` | Fetch URL from `microsoft_docs_search` (for overloads, full signatures) |
+- Validate an Azure SDK, Microsoft Graph, Entra, or other Microsoft API call.
+- Find the correct method, class, namespace, overload, or package.
+- Compare current code against a working Microsoft sample before writing or fixing code.
 
-## Finding Code Samples
+## Tool Routes
 
-Use `microsoft_code_sample_search` to get official, working examples:
+| Need | Tool | Example query |
+| ---- | ---- | ------------- |
+| API lookup | `microsoft_docs_search` | `BlobClient UploadAsync Azure.Storage.Blobs` |
+| Full signature or overloads | `microsoft_docs_fetch` | Fetch the page returned from search |
+| Working sample | `microsoft_code_sample_search` | `upload blob managed identity` with `language: "csharp"` |
+| Package or namespace check | `microsoft_docs_search` | `DefaultAzureCredential Azure.Identity package` |
+| Migration or deprecation | `microsoft_docs_search` | `CloudBlobClient migration v12` |
 
-```
-microsoft_code_sample_search(query: "upload file to blob storage", language: "csharp")
-microsoft_code_sample_search(query: "authenticate with managed identity", language: "python")
-microsoft_code_sample_search(query: "send message service bus", language: "javascript")
-```
+## Default Workflow
 
-**When to use:**
-- Before writing code—find a working pattern to follow
-- After errors—compare your code against a known-good sample
-- Unsure of initialization/setup—samples show complete context
+1. Confirm the API surface exists with `microsoft_docs_search`.
+2. Fetch the full reference page when overloads, parameters, or deprecation notes matter.
+3. Find a working sample with `microsoft_code_sample_search`.
+4. Return the verified method, package, and sample-based pattern instead of guessing.
 
-## API Lookups
+## Validation
 
-```
-# Verify method exists (include namespace for precision)
-"BlobClient UploadAsync Azure.Storage.Blobs"
-"GraphServiceClient Users Microsoft.Graph"
+- Re-check any method name that seems unusually convenient or novel.
+- Verify SDK family and package naming, such as `Azure.*`, `azure-*`, or `Microsoft.Graph`.
+- For auth or `403 Forbidden` issues, route to credential, RBAC, or permissions docs.
+- Prefer official migration guidance when v11 or v12 differences or deprecated APIs appear.
 
-# Find class/interface
-"DefaultAzureCredential class Azure.Identity"
+## References
 
-# Find correct package
-"Azure Blob Storage NuGet package"
-"azure-storage-blob pip package"
-```
-
-Fetch full page when method has multiple overloads or you need complete parameter details.
-
-## Error Troubleshooting
-
-Use `microsoft_code_sample_search` to find working code samples and compare with your implementation. For specific errors, use `microsoft_docs_search` and `microsoft_docs_fetch`:
-
-| Error Type | Query |
-|------------|-------|
-| Method not found | `"[ClassName] methods [Namespace]"` |
-| Type not found | `"[TypeName] NuGet package namespace"` |
-| Wrong signature | `"[ClassName] [MethodName] overloads"` → fetch full page |
-| Deprecated warning | `"[OldType] migration v12"` |
-| Auth failure | `"DefaultAzureCredential troubleshooting"` |
-| 403 Forbidden | `"[ServiceName] RBAC permissions"` |
-
-## When to Verify
-
-Always verify when:
-- Method name seems "too convenient" (`UploadFile` vs actual `Upload`)
-- Mixing SDK versions (v11 `CloudBlobClient` vs v12 `BlobServiceClient`)
-- Package name doesn't follow conventions (`Azure.*` for .NET, `azure-*` for Python)
-- Using an API for the first time
-
-## Validation Workflow
-
-Before generating code using Microsoft SDKs, verify it's correct:
-
-1. **Confirm method or package exists** — `microsoft_docs_search(query: "[ClassName] [MethodName] [Namespace]")`
-2. **Fetch full details** (for overloads/complex params) — `microsoft_docs_fetch(url: "...")`
-3. **Find working sample** — `microsoft_code_sample_search(query: "[task]", language: "[lang]")`
-
-For simple lookups, step 1 alone may suffice. For complex API usage, complete all three steps.
+- [Microsoft Learn](https://learn.microsoft.com/)
+- [Azure SDK guidelines](https://azure.github.io/azure-sdk/)

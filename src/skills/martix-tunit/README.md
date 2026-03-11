@@ -7,7 +7,7 @@ installs should consume directly.
 
 - Canonical source root: `src\skills\martix-tunit`
 - Primary install surface: standalone `skills` CLI
-- Secondary install surface: direct Copilot marketplace registration (pending)
+- Secondary install surface: Copilot CLI plugin marketplace
 - Discovery key: `martix-tunit`
 
 ## Package structure
@@ -62,6 +62,28 @@ npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-tunit -a github
 To use a GitHub tree URL, use the direct path to the `martix-tunit`
 folder in the repository.
 
+## Copilot CLI plugin marketplace flow
+
+Use the marketplace flow against the same standalone source package. The
+marketplace entry points directly at `src\skills\martix-tunit`.
+
+```powershell
+copilot plugin marketplace add MartiXDev/ai-marketplace
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin install martix-tunit@martix-ai-marketplace
+```
+
+Only the following slash-command equivalents are documented in the reviewed
+research, so keep marketplace browsing as a shell command for now.
+
+```text
+/plugin marketplace add MartiXDev/ai-marketplace
+/plugin marketplace list
+/plugin install martix-tunit@martix-ai-marketplace
+/plugin marketplace remove martix-ai-marketplace
+```
+
 ## Verification
 
 ## Standalone validation
@@ -75,6 +97,16 @@ npx skills list
 
 Expect to see an installed entry named `martix-tunit` after a
 successful install.
+
+## Marketplace validation
+
+Verify marketplace registration and plugin installation with these commands:
+
+```powershell
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin list
+```
 
 ## Update
 
@@ -98,8 +130,8 @@ Copilot deduplicates by the skill `name` declared in `SKILL.md`, not by folder
 path. A project or personal standalone install can load before a later
 marketplace-delivered copy with the same name.
 
-- A standalone `martix-tunit` install can shadow a future direct marketplace
-  registration of `martix-tunit`.
+- A standalone `martix-tunit` install can shadow the marketplace version of
+  `martix-tunit`.
 - For marketplace validation, use a clean environment or remove the standalone
   copy first.
 - If both surfaces must coexist, the eventual package names must stay distinct.

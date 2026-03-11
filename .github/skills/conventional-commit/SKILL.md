@@ -1,72 +1,53 @@
 ---
 name: conventional-commit
-description: 'Prompt and workflow for generating conventional commit messages using a structured XML format. Guides users to create standardized, descriptive commit messages in line with the Conventional Commits specification, including instructions, examples, and validation.'
+description: 'Generate or review Conventional Commit messages in structured XML and final commit form. Use whenever requests mention conventional commits, commit messages, git commit, type/scope selection, BREAKING CHANGE, changelog-friendly history, or mapping diffs to feat, fix, docs, refactor, chore, ci, test, perf, build, or revert.'
 ---
 
-### Instructions
+## Conventional Commit Router
 
-```xml
-	<description>This file contains a prompt template for generating conventional commit messages. It provides instructions, examples, and formatting guidelines to help users write standardized, descriptive commit messages in accordance with the Conventional Commits specification.</description>
-```
+## When to Use
 
-### Workflow
+- Turn staged or unstaged Git changes into a Conventional Commit.
+- Choose the right `type`, `scope`, or `BREAKING CHANGE` footer.
+- Produce structured XML plus the final `type(scope): description` line.
 
-**Follow these steps:**
+## Default Workflow
 
-1. Run `git status` to review changed files.
-2. Run `git diff` or `git diff --cached` to inspect changes.
-3. Stage your changes with `git add <file>`.
-4. Construct your commit message using the following XML structure.
-5. After generating your commit message, Copilot will automatically run the following command in your integrated terminal (no confirmation needed):
+1. Review `git status`, `git diff`, or `git diff --cached` when repository state is available.
+2. Infer the smallest accurate commit `type` from the actual change.
+3. Add `scope` only when it helps and is supported by the diff.
+4. Keep the description short, imperative, and release-note friendly.
+5. Add body and footer only when they add important context.
 
-```bash
-git commit -m "type(scope): description"
-```
+## Commit Routes
 
-6. Just execute this prompt and Copilot will handle the commit for you in the terminal.
+| Need | Guidance |
+| ---- | -------- |
+| Commit type | Use `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, or `revert`. |
+| Scope | Keep it optional and narrow, such as `api`, `ui`, or `docs`. |
+| Description | Use a short imperative summary such as `add`, `fix`, `update`, or `remove`. |
+| Body | Explain why the change exists, important side effects, or migration notes. |
+| Footer | Use for `BREAKING CHANGE:` details and issue references. |
 
-### Commit Message Structure
+## XML Template
 
 ```xml
 <commit-message>
-	<type>feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert</type>
-	<scope>()</scope>
-	<description>A short, imperative summary of the change</description>
-	<body>(optional: more detailed explanation)</body>
-	<footer>(optional: e.g. BREAKING CHANGE: details, or issue references)</footer>
+  <type>feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert</type>
+  <scope>optional-scope</scope>
+  <description>short imperative summary</description>
+  <body>optional rationale or context</body>
+  <footer>optional BREAKING CHANGE or issue reference</footer>
 </commit-message>
 ```
 
-### Examples
+## Validation
 
-```xml
-<examples>
-	<example>feat(parser): add ability to parse arrays</example>
-	<example>fix(ui): correct button alignment</example>
-	<example>docs: update README with usage instructions</example>
-	<example>refactor: improve performance of data processing</example>
-	<example>chore: update dependencies</example>
-	<example>feat!: send email on registration (BREAKING CHANGE: email service required)</example>
-</examples>
-```
+- Do not invent a scope when the change is cross-cutting or unclear.
+- Use `!` in the header or a `BREAKING CHANGE:` footer when compatibility changes.
+- Keep the first line concise; move detail into the body or footer.
+- If the user wants a command, return a ready-to-run `git commit -m` example.
 
-### Validation
+## References
 
-```xml
-<validation>
-	<type>Must be one of the allowed types. See <reference>https://www.conventionalcommits.org/en/v1.0.0/#specification</reference></type>
-	<scope>Optional, but recommended for clarity.</scope>
-	<description>Required. Use the imperative mood (e.g., "add", not "added").</description>
-	<body>Optional. Use for additional context.</body>
-	<footer>Use for breaking changes or issue references.</footer>
-</validation>
-```
-
-### Final Step
-
-```xml
-<final-step>
-	<cmd>git commit -m "type(scope): description"</cmd>
-	<note>Replace with your constructed message. Include body and footer if needed.</note>
-</final-step>
-```
+- [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/)

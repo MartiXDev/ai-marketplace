@@ -7,12 +7,12 @@ description: 'Maintainer and user guide for the martix-markdown standalone skill
 `martix-markdown` is the canonical standalone-first source package for
 the MartiX Markdown skill. It now ships the authored router, grouped rule
 library, instruction-bridge layer, reference maps, templates, and
-machine-readable taxonomy that standalone installs and future direct marketplace
+machine-readable taxonomy that standalone installs and direct marketplace
 registration should consume from `src\skills`.
 
 - Canonical source root: `src\skills\martix-markdown`
 - Primary install surface: standalone `skills` CLI
-- Secondary install surface: direct Copilot marketplace registration (pending)
+- Secondary install surface: Copilot CLI plugin marketplace
 - Discovery key: `martix-markdown`
 
 ## Package structure
@@ -64,8 +64,8 @@ registration should consume from `src\skills`.
   [assets/taxonomy.json](./assets/taxonomy.json), and
   [assets/section-order.json](./assets/section-order.json) together whenever
   rules, references, or templates move.
-- Marketplace registration should point directly at this folder as the single
-  source of truth.
+- Marketplace registration points directly at this folder as the single source
+  of truth.
 
 ## Installation
 
@@ -92,6 +92,28 @@ npx skills add C:\Git\MartiXDev\ai-marketplace\src\skills\martix-markdown -a git
 To use a GitHub tree URL, point directly at
 `src/skills/martix-markdown` in the repository.
 
+## Copilot CLI plugin marketplace flow
+
+Use the marketplace flow against the same standalone source package. The
+marketplace entry points directly at `src\skills\martix-markdown`.
+
+```powershell
+copilot plugin marketplace add MartiXDev/ai-marketplace
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin install martix-markdown@martix-ai-marketplace
+```
+
+Only the following slash-command equivalents are documented in the reviewed
+research, so keep marketplace browsing as a shell command for now.
+
+```text
+/plugin marketplace add MartiXDev/ai-marketplace
+/plugin marketplace list
+/plugin install martix-markdown@martix-ai-marketplace
+/plugin marketplace remove martix-ai-marketplace
+```
+
 ## Verification
 
 ## Standalone validation
@@ -105,6 +127,16 @@ npx skills list
 
 Expect to see an installed entry named `martix-markdown` after a
 successful install.
+
+## Marketplace validation
+
+Verify marketplace registration and plugin installation with these commands:
+
+```powershell
+copilot plugin marketplace list
+copilot plugin marketplace browse martix-ai-marketplace
+copilot plugin list
+```
 
 To validate the package's own Markdown docs in this repository, run:
 
@@ -137,8 +169,8 @@ Copilot deduplicates by the skill `name` declared in `SKILL.md`, not by folder
 path. A project or personal standalone install can load before a later
 marketplace-delivered copy with the same name.
 
-- A standalone `martix-markdown` install can shadow a future direct
-  marketplace registration of `martix-markdown`.
+- A standalone `martix-markdown` install can shadow the marketplace version of
+  `martix-markdown`.
 - For marketplace validation, use a clean environment or remove the standalone
   copy first.
 - If both surfaces must coexist, the eventual package names must stay distinct.

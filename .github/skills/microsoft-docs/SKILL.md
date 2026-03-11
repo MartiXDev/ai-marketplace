@@ -1,113 +1,51 @@
 ---
 name: microsoft-docs
-description: 'Query official Microsoft documentation to find concepts, tutorials, and code examples across Azure, .NET, Agent Framework, Aspire, VS Code, GitHub, and more. Uses Microsoft Learn MCP as the default, with Context7 and Aspire MCP for content that lives outside learn.microsoft.com.'
+description: 'Query official Microsoft documentation and samples across Azure, .NET, Agent Framework, Aspire, VS Code, GitHub, Microsoft 365, Power Platform, Semantic Kernel, and more. Use whenever requests mention Microsoft Learn MCP, Context7, aspire.dev, official docs lookup, tutorials, configuration, or code examples.'
 ---
 
-# Microsoft Docs
+## Microsoft Docs Router
 
-Research skill for the Microsoft technology ecosystem. Covers learn.microsoft.com and documentation that lives outside it (VS Code, GitHub, Aspire, Agent Framework repos).
+## When to Use
 
----
+- Find official concepts, tutorials, configuration guides, or code examples for Microsoft technologies.
+- Decide whether the source lives on Learn, aspire.dev, VS Code docs, GitHub docs, or a repo.
+- Route queries to Microsoft Learn MCP first, then Aspire MCP or Context7 when the docs live elsewhere.
 
-## Default: Microsoft Learn MCP
+## Route Table
 
-Use these tools for **everything on learn.microsoft.com** — Azure, .NET, M365, Power Platform, Agent Framework, Semantic Kernel, Windows, and more. This is the primary tool for the vast majority of Microsoft documentation queries.
+| Source or topic | Default tool or tools | Use when |
+| --------------- | --------------------- | -------- |
+| `learn.microsoft.com` | `microsoft_docs_search`, `microsoft_code_sample_search`, and `microsoft_docs_fetch` | Azure, .NET, M365, Power Platform, Semantic Kernel, Windows, or Agent Framework tutorials |
+| .NET Aspire on `aspire.dev` | `list_docs`, `search_docs`, and `get_doc` | Aspire CLI 13.2+ docs, integrations, deployment, and CLI reference |
+| Aspire fallback | `mcp_context7_resolve-library-id` plus `mcp_context7_query-docs` with `/microsoft/aspire.dev`, `/dotnet/aspire`, or `/communitytoolkit/aspire` | Older Aspire MCP setups or source-level detail |
+| VS Code docs | Context7 with `/websites/code_visualstudio` or `/websites/code_visualstudio_api` | Editor features, settings, debugging, or extension APIs |
+| GitHub docs | Context7 with `/websites/github_en` or `/websites/cli_github` | GitHub Actions, Copilot, repositories, security, or `gh` CLI |
+| Agent Framework deep detail | Learn MCP plus Context7 with `/websites/learn_microsoft_en-us_agent-framework` and `/microsoft/agent-framework` | Pair Learn tutorials with repo-level API or DevUI detail |
 
-| Tool | Purpose |
-|------|---------|
-| `microsoft_docs_search` | Search learn.microsoft.com — concepts, guides, tutorials, configuration |
-| `microsoft_code_sample_search` | Find working code snippets from Learn docs. Pass `language` (`python`, `csharp`, etc.) for best results |
-| `microsoft_docs_fetch` | Get full page content from a specific URL (when search excerpts aren't enough) |
+## Default Workflow
 
-Use `microsoft_docs_fetch` after search when you need complete tutorials, all config options, or when search excerpts are truncated.
+1. Start with Microsoft Learn tools unless the docs are known to live outside Learn.
+2. Resolve Context7 library IDs once per session before querying external docs.
+3. Make queries specific by including product, version, intent, and language.
+4. Fetch full pages when search excerpts miss setup steps, limits, or full configuration tables.
 
----
+## Query Patterns
 
-## Exceptions: When to Use Other Tools
+| Goal | Better query |
+| ---- | ------------ |
+| Overview | `Azure Functions Python v2 programming model` |
+| Limits and best practices | `Cosmos DB partition key design best practices` |
+| Workflow or automation | `GitHub Actions workflow_dispatch inputs matrix strategy` |
+| Aspire integration | `Aspire AddUvicornApp Python FastAPI integration` |
+| Agent Framework | `Agent Framework workflow conditional edges branching handoff` |
 
-The following categories live **outside** learn.microsoft.com. Use the specified tool instead.
+## Validation
 
-### .NET Aspire — Use Aspire MCP Server (preferred) or Context7
+- Do not use Context7 for Learn content unless the authoritative docs are actually external.
+- Include version, task intent, and language whenever the product is broad or polyglot.
+- For Agent Framework, combine Learn guidance with repo detail when APIs or DevUI endpoints matter.
 
-Aspire docs live on **aspire.dev**, not Learn. The best tool depends on your Aspire CLI version:
+## References
 
-**CLI 13.2+** (recommended) — The Aspire MCP server includes built-in docs search tools:
-
-| MCP Tool | Description |
-|----------|-------------|
-| `list_docs` | Lists all available documentation from aspire.dev |
-| `search_docs` | Weighted lexical search across aspire.dev content |
-| `get_doc` | Retrieves a specific document by slug |
-
-These ship in Aspire CLI 13.2 ([PR #14028](https://github.com/dotnet/aspire/pull/14028)). To update: `aspire update --self --channel daily`. Ref: https://davidpine.dev/posts/aspire-docs-mcp-tools/
-
-**CLI 13.1** — The MCP server provides integration lookup (`list_integrations`, `get_integration_docs`) but **not** docs search. Fall back to Context7:
-
-| Library ID | Use for |
-|---|---|
-| `/microsoft/aspire.dev` | Primary — guides, integrations, CLI reference, deployment |
-| `/dotnet/aspire` | Runtime source — API internals, implementation details |
-| `/communitytoolkit/aspire` | Community integrations — Go, Java, Node.js, Ollama |
-
-### VS Code — Use Context7
-
-VS Code docs live on **code.visualstudio.com**, not Learn.
-
-| Library ID | Use for |
-|---|---|
-| `/websites/code_visualstudio` | User docs — settings, features, debugging, remote dev |
-| `/websites/code_visualstudio_api` | Extension API — webviews, TreeViews, commands, contribution points |
-
-### GitHub — Use Context7
-
-GitHub docs live on **docs.github.com** and **cli.github.com**.
-
-| Library ID | Use for |
-|---|---|
-| `/websites/github_en` | Actions, API, repos, security, admin, Copilot |
-| `/websites/cli_github` | GitHub CLI (`gh`) commands and flags |
-
-### Agent Framework — Use Learn MCP + Context7
-
-Agent Framework tutorials are on learn.microsoft.com (use `microsoft_docs_search`), but the **GitHub repo** has API-level detail that is often ahead of published docs — particularly DevUI REST API reference, CLI options, and .NET integration.
-
-| Library ID | Use for |
-|---|---|
-| `/websites/learn_microsoft_en-us_agent-framework` | Tutorials — DevUI guides, tracing, workflow orchestration |
-| `/microsoft/agent-framework` | API detail — DevUI REST endpoints, CLI flags, auth, .NET `AddDevUI`/`MapDevUI` |
-
-**DevUI tip:** Query the Learn website source for how-to guides, then the repo source for API-level specifics (endpoint schemas, proxy config, auth tokens).
-
----
-
-## Context7 Setup
-
-For any Context7 query, resolve the library ID first (one-time per session):
-
-1. Call `mcp_context7_resolve-library-id` with the technology name
-2. Call `mcp_context7_query-docs` with the returned library ID and a specific query
-
----
-
-## Writing Effective Queries
-
-Be specific — include version, intent, and language:
-
-```
-# ❌ Too broad
-"Azure Functions"
-"agent framework"
-
-# ✅ Specific
-"Azure Functions Python v2 programming model"
-"Cosmos DB partition key design best practices"
-"GitHub Actions workflow_dispatch inputs matrix strategy"
-"Aspire AddUvicornApp Python FastAPI integration"
-"DevUI serve agents tracing OpenTelemetry directory discovery"
-"Agent Framework workflow conditional edges branching handoff"
-```
-
-Include context:
-- **Version** when relevant (`.NET 8`, `Aspire 13`, `VS Code 1.96`)
-- **Task intent** (`quickstart`, `tutorial`, `overview`, `limits`, `API reference`)
-- **Language** for polyglot docs (`Python`, `TypeScript`, `C#`)
+- [Microsoft Learn](https://learn.microsoft.com/)
+- [Aspire docs MCP tools overview](https://davidpine.dev/posts/aspire-docs-mcp-tools/)

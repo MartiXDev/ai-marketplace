@@ -1,49 +1,42 @@
 ---
 name: csharp-async
-description: 'Get best practices for C# async programming'
+description: 'Review, write, or refactor C# async code using TAP best practices. Use whenever requests mention async/await, Task, ValueTask, CancellationToken, IAsyncEnumerable, ConfigureAwait, Task.WhenAll, deadlocks, .Result, .Wait(), or sync-over-async bugs in .NET.'
 ---
 
-# C# Async Programming Best Practices
+## C# Async Router
 
-Your goal is to help me follow best practices for asynchronous programming in C#.
+## When to Use
 
-## Naming Conventions
+- Add or review async and await code in C# or .NET.
+- Choose between `Task`, `Task<T>`, `ValueTask<T>`, and `IAsyncEnumerable<T>`.
+- Fix deadlocks, blocking calls, cancellation gaps, or concurrency issues.
 
-- Use the 'Async' suffix for all async methods
-- Match method names with their synchronous counterparts when applicable (e.g., `GetDataAsync()` for `GetData()`)
+## Default Workflow
 
-## Return Types
+1. Use the Task-based Asynchronous Pattern for public APIs.
+2. Keep async method names aligned with sync counterparts and add the `Async` suffix.
+3. Remove blocking calls before tuning performance.
+4. Add cancellation, exception handling, and concurrency guidance where it changes correctness.
 
-- Return `Task<T>` when the method returns a value
-- Return `Task` when the method doesn't return a value
-- Consider `ValueTask<T>` for high-performance scenarios to reduce allocations
-- Avoid returning `void` for async methods except for event handlers
+## Route Table
 
-## Exception Handling
+| Area | Prefer | Avoid |
+| ---- | ------ | ----- |
+| Naming | `GetDataAsync` for async APIs | Async methods without the `Async` suffix |
+| Return type | `Task`, `Task<T>`, or `ValueTask<T>` for hot paths | `async void` except event handlers |
+| Composition | `Task.WhenAll()` and `Task.WhenAny()` | Manual polling or serialized awaits when work can run together |
+| Streams | `IAsyncEnumerable<T>` for async sequences | Buffering everything before returning |
+| Context | `ConfigureAwait(false)` in reusable library code when safe | Assuming context capture is always required |
+| Cancellation | `CancellationToken` on long-running or I/O work | Fire-and-forget work with no cancellation path |
 
-- Use try/catch blocks around await expressions
-- Avoid swallowing exceptions in async methods
-- Use `ConfigureAwait(false)` when appropriate to prevent deadlocks in library code
-- Propagate exceptions with `Task.FromException()` instead of throwing in async Task returning methods
+## Validation
 
-## Performance
+- Await task-returning calls unless the method intentionally returns the task directly.
+- Do not mix `.Wait()`, `.Result`, or `.GetAwaiter().GetResult()` into async flows.
+- Use `try` and `catch` around awaited operations when you need local recovery or richer errors.
+- Avoid swallowing exceptions, and prefer `Task.FromException(...)` or direct task returns over needless async wrappers.
 
-- Use `Task.WhenAll()` for parallel execution of multiple tasks
-- Use `Task.WhenAny()` for implementing timeouts or taking the first completed task
-- Avoid unnecessary async/await when simply passing through task results
-- Consider cancellation tokens for long-running operations
+## References
 
-## Common Pitfalls
-
-- Never use `.Wait()`, `.Result`, or `.GetAwaiter().GetResult()` in async code
-- Avoid mixing blocking and async code
-- Don't create async void methods (except for event handlers)
-- Always await Task-returning methods
-
-## Implementation Patterns
-
-- Implement the async command pattern for long-running operations
-- Use async streams (IAsyncEnumerable<T>) for processing sequences asynchronously
-- Consider the task-based asynchronous pattern (TAP) for public APIs
-
-When reviewing my C# code, identify these issues and suggest improvements that follow these best practices.
+- [Async programming scenarios in C#](https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/)
+- [Task-based Asynchronous Pattern](https://learn.microsoft.com/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap)

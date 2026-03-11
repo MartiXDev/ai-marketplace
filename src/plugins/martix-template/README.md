@@ -1,6 +1,6 @@
 ## MartiX template source (non-installable)
 
-`plugins/martix-template` is a shared source folder for reusable MartiX plugin
+`src/plugins/martix-template` is a shared source folder for reusable MartiX plugin
 templates.
 
 ## Scope
@@ -9,8 +9,9 @@ templates.
 - This folder should not be added to:
   - `marketplace/catalog.yaml`
   - `.github/plugin/marketplace.json`
-- Runtime assets must stay in concrete plugins such as
-  `plugins/martix-dotnet-library`.
+- Runtime assets must stay in concrete packages such as
+  `src/plugins/martix-dotnet-library` or standalone skill folders under
+  `src/skills/` when no plugin-scoped assets are needed.
 
 ## Current template set
 
@@ -31,10 +32,14 @@ templates.
   - expanded long-form guidance in `AGENTS.md`,
   - package metadata in `metadata.json`,
   - maintenance instructions in a package-local `README.md`.
-- Adapt that baseline to this repository's plugin-first model:
-  - executable assets still live under `agents/`, `prompts/`, `instructions/`,
-    `hooks/`, `commands/`, and `workflows/`,
-  - detailed skill guidance lives inside plugin-local `skills/`,
+- Adapt that baseline to this repository's hybrid source model:
+  - executable plugin assets still live under
+    `src/plugins/<plugin>/agents/`, `prompts/`, `instructions/`, `hooks/`,
+    `commands/`, and `workflows/`,
+  - standalone skill packages can live under `src/skills/<skill-name>/` when no
+    plugin-scoped assets are needed,
+  - plugin-local `skills/` folders are only needed when a concrete plugin
+    genuinely requires them alongside plugin-scoped assets,
   - evaluation artifacts use repo-native `evals/` instead of Vercel's generated
     `test-cases.json`.
 

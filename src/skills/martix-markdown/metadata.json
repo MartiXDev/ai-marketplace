@@ -8,7 +8,7 @@
     "distributionModel": "standalone skill with direct Copilot marketplace registration"
   },
   "summary": "Standalone-first MartiX skill package for markdownlint-aware Markdown authoring, MD-code triage, grouped rule routing, repo-local overlay comparison, custom-rule decisions, Prettier coexistence, and accessibility-aware review.",
-  "abstract": "This package is the canonical source for the MartiX Markdown skill. It now ships the authored entrypoints, 7 grouped rule files, 8 reference docs including the instruction-bridge layer, 4 templates, taxonomy assets, and registration-ready metadata that standalone installs and future direct marketplace registration should consume from src/skills.",
+  "abstract": "This package is the canonical source for the MartiX Markdown skill. It now ships the authored entrypoints, 7 grouped rule files, 8 reference docs including the instruction-bridge layer, 4 templates, taxonomy assets, and registration-ready metadata that standalone installs and direct marketplace registration should consume from src/skills.",
   "compatibility": {
     "primaryTarget": "GitHub Copilot CLI",
     "secondaryTargets": [
@@ -282,8 +282,8 @@
   "discovery": {
     "dedupeKey": "martix-markdown",
     "precedence": "first-found-wins",
-    "sameNameConflictRisk": "A standalone project or personal install can shadow a future plugin-delivered copy with the same skill name.",
-    "recommendedValidationApproach": "Use a clean environment or remove any standalone install before validating any future marketplace wrapper."
+    "sameNameConflictRisk": "A standalone project or personal install can shadow a plugin-delivered copy with the same skill name.",
+    "recommendedValidationApproach": "Use a clean environment or remove any standalone install before validating the marketplace-delivered copy."
   },
   "references": {
     "local": [

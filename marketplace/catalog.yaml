@@ -69,3 +69,11 @@ plugins:
     install:
       source: local-marketplace
       marketplace_root: .
+  - name: martix-markdown
+    version: 0.1.0-preview.1
+    phase: 9
+    source_path: src/skills/martix-markdown
+    package_type: standalone-skill
+    install:
+      source: local-marketplace
+      marketplace_root: .

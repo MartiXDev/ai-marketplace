@@ -15,7 +15,13 @@
   - [skills/react-best-practices/rules/*.md](https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/rules/*.md) — *.md files with specific topics linked from the SKILL.md
     - [skills/react-best-practices/rules/_sections.md](https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/rules/_sections.md) — these are sections for React, it is only inspiration Dotnet / C# Skill
     - [skills/react-best-practices/rules/_template.md](https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/rules/_template.md) — this template can be used as is in "martix-dotnet-csharp" Skill
-- In the deep research phase read ALL the (I really mean the full documantation) C# and Dotnet docs (read ALL the markdowns referenced in [TOC](https://github.com/dotnet/docs/tree/main/docs/csharp/toc.yml) OR in local copy: C:\Git\dotnet\docs\docs\csharp if it's better for you to process it) to get very detailed info for our Skill => it will be very long list of tasks to process and the result will be the most complex c#/dotnet Agent Skill in the World
+- In the deep research phase read ALL the (I really mean the full
+  documantation) C# and Dotnet docs (read ALL the markdowns referenced in
+  [TOC](https://github.com/dotnet/docs/tree/main/docs/csharp/toc.yml) OR in
+  local copy: `C:\Git\dotnet\docs\docs\csharp` if it's better for you to
+  process it) to get very detailed info for our Skill => it will be very long
+  list of tasks to process and the result will be the most complex c#/dotnet
+  Agent Skill in the World
 - Prepare a comprehensive plan with many tasks as there is lot of information resources to be processed which is too much for any LLM context window, so prepare very detailed plan with multiple phases and many tasks to achieve this, use Copilot Fleet subagents to work on this in parallell
 - The result of research phase will be updated plan (or it can be a separate file, something like future-file-structure.md) which must contain all file names which will be created later in implementation phase, so we can approve it as a last step in planning phase
 - My new Skill(s) must be created mainly for Copilot CLI, but optionally also for Claude Code, Codex and Open Code
