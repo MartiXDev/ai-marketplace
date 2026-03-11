@@ -1,85 +1,46 @@
 ---
 name: dotnet-best-practices
-description: 'Ensure .NET/C# code meets best practices for the solution/project.'
+description: 'Review or improve .NET and C# code against project best practices. Use whenever requests mention architecture, XML docs, primary constructors, DI, async/await, ResourceManager, MSTest, FluentAssertions, Moq, IConfiguration, Semantic Kernel, structured logging, security, or .NET 8 / C# 12 guidance.'
 ---
 
-# .NET/C# Best Practices
+## .NET Best Practices Router
 
-Your task is to ensure .NET/C# code in ${selection} meets the best practices specific to this solution/project. This includes:
+## When to Use
 
-## Documentation & Structure
+- Run a best-practices pass on new or existing .NET and C# code.
+- Check project conventions for architecture, DI, configuration, logging, testing, or localization.
+- Review code that touches `CommandHandler<TOptions>`, `ResourceManager`, `Semantic Kernel`, or service registration.
 
-- Create comprehensive XML documentation comments for all public classes, interfaces, methods, and properties
-- Include parameter descriptions and return value descriptions in XML comments
-- Follow the established namespace structure: {Core|Console|App|Service}.{Feature}
+## Default Workflow
 
-## Design Patterns & Architecture
+1. Preserve the solution architecture and namespace conventions before suggesting local edits.
+2. Review correctness, maintainability, and testability before style-only changes.
+3. Prefer established .NET patterns for DI, configuration, async flows, logging, and disposal.
+4. Call out security, localization, and validation issues explicitly.
 
-- Use primary constructor syntax for dependency injection (e.g., `public class MyClass(IDependency dependency)`)
-- Implement the Command Handler pattern with generic base classes (e.g., `CommandHandler<TOptions>`)
-- Use interface segregation with clear naming conventions (prefix interfaces with 'I')
-- Follow the Factory pattern for complex object creation.
+## Route Table
 
-## Dependency Injection & Services
+| Area | Prefer | Watch for |
+| ---- | ------ | --------- |
+| Documentation and structure | XML docs on public APIs and `{Core, Console, App, Service}.{Feature}` namespaces | Public behavior with no docs or unclear layering |
+| Design and architecture | Primary constructors, `CommandHandler<TOptions>`, interfaces, focused classes | Overgrown types, hidden dependencies, or weak abstractions |
+| DI and services | Constructor injection, `ArgumentNullException.ThrowIfNull(...)`, correct lifetimes, and `Microsoft.Extensions.DependencyInjection` conventions | Service locator patterns or ambiguous ownership |
+| Localization | `ResourceManager` with separate `LogMessages` and `ErrorMessages` resources | Hardcoded user-facing or log text |
+| Async | `async` and `await` for I/O, `Task` or `Task<T>`, and safe exception handling | Blocking calls or missing cancellation where needed |
+| Testing | MSTest with FluentAssertions and Moq when tests exist | Unclear AAA flow or missing failure-path coverage |
+| Configuration | Strongly typed options, data annotations, `IConfiguration` binding, and `appsettings.json` | Magic strings or unvalidated settings |
+| AI integration | `Microsoft.SemanticKernel`, structured output, and explicit model settings | Opaque AI flows or unbounded prompt behavior |
+| Logging and errors | Structured `ILogger` usage and specific exceptions | Stringly typed logs or swallowed exceptions |
+| Security and performance | Input validation, parameterized queries, disposal, and .NET 8 or C# 12 features | Unsafe defaults, leaked resources, or unnecessary allocations |
 
-- Use constructor dependency injection with null checks via ArgumentNullException
-- Register services with appropriate lifetimes (Singleton, Scoped, Transient)
-- Use Microsoft.Extensions.DependencyInjection patterns
-- Implement service interfaces for testability
+## Validation
 
-## Resource Management & Localization
+- Register services with intentional `Singleton`, `Scoped`, or `Transient` lifetimes.
+- Keep methods cohesive, names domain-aligned, and duplication low.
+- Prefer strongly typed configuration and explicit validation over ad hoc parsing.
+- Test success, failure, and null-parameter paths when behavior is public or critical.
 
-- Use ResourceManager for localized messages and error strings
-- Separate LogMessages and ErrorMessages resource files
-- Access resources via `_resourceManager.GetString("MessageKey")`
+## References
 
-## Async/Await Patterns
-
-- Use async/await for all I/O operations and long-running tasks
-- Return Task or Task<T> from async methods
-- Use ConfigureAwait(false) where appropriate
-- Handle async exceptions properly
-
-## Testing Standards
-
-- Use MSTest framework with FluentAssertions for assertions
-- Follow AAA pattern (Arrange, Act, Assert)
-- Use Moq for mocking dependencies
-- Test both success and failure scenarios
-- Include null parameter validation tests
-
-## Configuration & Settings
-
-- Use strongly-typed configuration classes with data annotations
-- Implement validation attributes (Required, NotEmptyOrWhitespace)
-- Use IConfiguration binding for settings
-- Support appsettings.json configuration files
-
-## Semantic Kernel & AI Integration
-
-- Use Microsoft.SemanticKernel for AI operations
-- Implement proper kernel configuration and service registration
-- Handle AI model settings (ChatCompletion, Embedding, etc.)
-- Use structured output patterns for reliable AI responses
-
-## Error Handling & Logging
-
-- Use structured logging with Microsoft.Extensions.Logging
-- Include scoped logging with meaningful context
-- Throw specific exceptions with descriptive messages
-- Use try-catch blocks for expected failure scenarios
-
-## Performance & Security
-
-- Use C# 12+ features and .NET 8 optimizations where applicable
-- Implement proper input validation and sanitization
-- Use parameterized queries for database operations
-- Follow secure coding practices for AI/ML operations
-
-## Code Quality
-
-- Ensure SOLID principles compliance
-- Avoid code duplication through base classes and utilities
-- Use meaningful names that reflect domain concepts
-- Keep methods focused and cohesive
-- Implement proper disposal patterns for resources
+- [Framework design guidelines](https://learn.microsoft.com/dotnet/standard/design-guidelines/)
+- [.NET dependency injection](https://learn.microsoft.com/dotnet/core/extensions/dependency-injection)

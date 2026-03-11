@@ -88,6 +88,47 @@ Do not create new plugin source assets under `.github`.
 - Add `src/plugins/<plugin-name>/skills/...` only when a plugin truly needs a
   plugin-local skill payload in addition to standalone assets.
 
+## Current package inventory
+
+The tables below reflect the current installable package set registered in
+[`.github/plugin/marketplace.json`](.github/plugin/marketplace.json).
+
+### Plugin packages
+
+- `martix-dotnet-library` (`0.1.0`) — `src/plugins/martix-dotnet-library`
+  Unified .NET library create, update, and review workflows.
+- `martix-webapi` (`0.1.0`) — `src/plugins/martix-webapi`
+  Planning and implementing new .NET 10 web apps with MartiX.WebApi
+  guidance.
+
+### Standalone skills
+
+These packages are registered directly from `src/skills` as the single source
+of truth.
+
+- `martix-dotnet-csharp` (`0.1.0`) — `src/skills/martix-dotnet-csharp`
+  .NET 10+ and C# 14+ authoring, modernization, and review workflows.
+- `martix-fastendpoints` (`0.1.0`) — `src/skills/martix-fastendpoints`
+  FastEndpoints startup, contracts, processors, transport, security, testing,
+  versioning, and Native AOT.
+- `martix-fluentvalidation` (`0.1.0`) — `src/skills/martix-fluentvalidation`
+  Validator authoring, RuleSets, ASP.NET Core integration, async validation,
+  testing, and upgrade planning.
+- `martix-tunit` (`0.1.0`) — `src/skills/martix-tunit`
+  Test authoring, parameterized tests, lifecycle hooks, parallel execution,
+  DI, and framework migration.
+- `martix-powershell` (`0.1.0-preview.1`) — `src/skills/martix-powershell`
+  PowerShell cmdlet and advanced-function authoring, validation, pipeline
+  behavior, error handling, and safety patterns.
+- `martix-markdown` (`0.1.0-preview.1`) — `src/skills/martix-markdown`
+  Markdownlint-aware authoring, lint repair, config decisions, custom rules,
+  toolchain coexistence, and accessibility review.
+
+### Shared scaffolding
+
+- `src/plugins/martix-template/` is a non-installable shared source folder for
+  bootstrapping and refactoring concrete `martix-*` packages.
+
 ## Install and use the marketplace
 
 ### 1) Register the marketplace
@@ -97,13 +138,16 @@ copilot plugin marketplace add MartiXDev/ai-marketplace
 copilot plugin marketplace list
 ```
 
-### 2) Install a single plugin (smoke test)
+### 2) Install a single package (smoke test)
 
 ```bash
 copilot plugin marketplace browse martix-ai-marketplace
 copilot plugin install martix-dotnet-library@martix-ai-marketplace
 copilot plugin list
 ```
+
+The same marketplace also serves standalone skill packages such as
+`martix-markdown` and `martix-powershell`.
 
 Optional interactive check:
 
