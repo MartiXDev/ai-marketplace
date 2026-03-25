@@ -123,6 +123,17 @@ of truth.
 - `martix-markdown` (`0.1.0-preview.1`) — `src/skills/martix-markdown`
   Markdownlint-aware authoring, lint repair, config decisions, custom rules,
   toolchain coexistence, and accessibility review.
+- `martix-sharepoint-server` (`0.1.0-preview.1`) — `src/skills/martix-sharepoint-server`
+  Classic and on-prem SharePoint Server guidance for farm solutions, WSP
+  packaging, features, event receivers, branding, site artifacts, and
+  modernization-aware SharePoint 2019 and Subscription Edition work.
+- `martix-sharepoint-spfx` (`0.1.0-preview.1`) — `src/skills/martix-sharepoint-spfx`
+  SharePoint Framework guidance for SharePoint Online-first SPFx development
+  with React, TypeScript, web parts, extensions, deployment, theming,
+  Teams/Viva integration, and migration.
+- `martix-sharepoint-pnp` (`0.1.0-preview.1`) — `src/skills/martix-sharepoint-pnp`
+  SharePoint PnP guidance for PnP PowerShell, CLI for Microsoft 365, PnPjs,
+  provisioning, automation, authentication, and cross-tool delivery choices.
 
 ### Shared scaffolding
 
